@@ -81,6 +81,15 @@ const TabInfo = () => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <FormControl fullWidth>
+              <InputLabel>Type</InputLabel>
+              <Select label='Type'>
+                <MenuItem value='온도'>온도</MenuItem>
+                <MenuItem value='습도'>습도</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <FormControl fullWidth>
               <InputLabel id='form-layouts-separator-multiple-select-label'>Languages</InputLabel>
               <Select
                 multiple

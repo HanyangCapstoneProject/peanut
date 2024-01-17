@@ -12,85 +12,99 @@ import TableContainer from '@mui/material/TableContainer'
 
 const rows = [
   {
-    age: 27,
-    status: 'current',
-    date: '09/27/2018',
-    name: 'Sally Quinn',
-    salary: '$19586.23',
-    email: 'eebsworth2m@sbwire.com',
-    designation: 'Human Resources Assistant'
+    Sensor_code: 1,
+    System_code: 1,
+    Building: 'A건물',
+    Level: 1,
+    Area: 'a1',
+    Mac: '201807130C23',
+    Type: '온도',
+    Datetime: '2023-12-28 14:30:17',
+    Use: '사용'
   },
   {
-    age: 61,
-    date: '09/23/2016',
-    salary: '$23896.35',
-    status: 'professional',
-    name: 'Margaret Bowers',
-    email: 'kocrevy0@thetimes.co.uk',
-    designation: 'Nuclear Power Engineer'
+    Sensor_code: 2,
+    System_code: 2,
+    Building: 'A건물',
+    Level: 1,
+    Area: 'a3',
+    Mac: '201809130C25',
+    Type: '온도',
+    Datetime: '2023-12-28 17:30:17',
+    Use: '미설치'
   },
   {
-    age: 59,
-    date: '10/15/2017',
-    name: 'Minnie Roy',
-    status: 'rejected',
-    salary: '$18991.67',
-    email: 'ediehn6@163.com',
-    designation: 'Environmental Specialist'
+    Sensor_code: 3,
+    System_code: 3,
+    Building: 'C건물',
+    Level: 1,
+    Area: 'a1',
+    Mac: '200706130C13',
+    Type: '온도',
+    Datetime: '2023-12-28 14:30:17',
+    Use: '사용'
   },
   {
-    age: 30,
-    date: '06/12/2018',
-    status: 'resigned',
-    salary: '$19252.12',
-    name: 'Ralph Leonard',
-    email: 'dfalloona@ifeng.com',
-    designation: 'Sales Representative'
+    Sensor_code: 4,
+    System_code: 4,
+    Building: 'C건물',
+    Level: 1,
+    Area: 'a1',
+    Mac: '201404110B23',
+    Type: '온도',
+    Datetime: '2023-12-28 14:30:17',
+    Use: '사용'
   },
   {
-    age: 66,
-    status: 'applied',
-    date: '03/24/2018',
-    salary: '$13076.28',
-    name: 'Annie Martin',
-    designation: 'Operator',
-    email: 'sganderton2@tuttocitta.it'
+    Sensor_code: 5,
+    System_code: 5,
+    Building: 'A건물',
+    Level: 2,
+    Area: 'd1',
+    Mac: '201507130C21',
+    Type: '습도',
+    Datetime: '2023-12-28 14:30:17',
+    Use: '사용안함'
   },
   {
-    age: 33,
-    date: '08/25/2017',
-    salary: '$10909.52',
-    name: 'Adeline Day',
-    status: 'professional',
-    email: 'hnisius4@gnu.org',
-    designation: 'Senior Cost Accountant'
+    Sensor_code: 6,
+    System_code: 6,
+    Building: 'B건물',
+    Level: 2,
+    Area: 'a2',
+    Mac: '201807130C23',
+    Type: '온도',
+    Datetime: '2023-12-28 14:30:17',
+    Use: '미설치'
   },
   {
-    age: 61,
-    status: 'current',
-    date: '06/01/2017',
-    salary: '$17803.80',
-    name: 'Lora Jackson',
-    designation: 'Geologist',
-    email: 'ghoneywood5@narod.ru'
+    Sensor_code: 7,
+    System_code: 7,
+    Building: 'A건물',
+    Level: 2,
+    Area: 'b1',
+    Mac: '201211210C23',
+    Type: '온도',
+    Datetime: '2024-01-07 08:30:17',
+    Use: '사용'
   },
   {
-    age: 22,
-    date: '12/03/2017',
-    salary: '$12336.17',
-    name: 'Rodney Sharp',
-    status: 'professional',
-    designation: 'Cost Accountant',
-    email: 'dcrossman3@google.co.jp'
+    Sensor_code: 8,
+    System_code: 8,
+    Building: 'B건물',
+    Level: 3,
+    Area: 'a3',
+    Mac: '202107130B17',
+    Type: '온도',
+    Datetime: '2024-01-02 14:30:17',
+    Use: '사용안함'
   }
 ]
 
 const statusObj = {
-  applied: { color: 'info' },
-  rejected: { color: 'error' },
-  current: { color: 'primary' },
-  resigned: { color: 'warning' },
-  professional: { color: 'success' }
+  '사용': { color: 'success' },
+  '사용안함': { color: 'error' },
+  '미설치': { color: 'warning' }
 }
 
 const DashboardTable = () => {
@@ -100,31 +114,35 @@ const DashboardTable = () => {
         <Table sx={{ minWidth: 800 }} aria-label='table in dashboard'>
           <TableHead>
             <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>Date</TableCell>
-              <TableCell>Salary</TableCell>
-              <TableCell>Age</TableCell>
-              <TableCell>Status</TableCell>
+              <TableCell>Sensor_code</TableCell>
+              <TableCell>Type</TableCell>
+              <TableCell>Building</TableCell>
+              <TableCell>Level</TableCell>
+              <TableCell>Area</TableCell>
+              <TableCell>Mac</TableCell>
+              <TableCell>Datetime</TableCell>
+              <TableCell>Use</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {rows.map(row => (
-              <TableRow hover key={row.name} sx={{ '&:last-of-type td, &:last-of-type th': { border: 0 } }}>
+              <TableRow hover key={row.Sensor_code} sx={{ '&:last-of-type td, &:last-of-type th': { border: 0 } }}>
                 <TableCell sx={{ py: theme => `${theme.spacing(0.5)} !important` }}>
                   <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <Typography sx={{ fontWeight: 500, fontSize: '0.875rem !important' }}>{row.name}</Typography>
+                    <Typography sx={{ fontWeight: 500, fontSize: '0.875rem !important' }}>{row.Sensor_code}</Typography>
                     <Typography variant='caption'>{row.designation}</Typography>
                   </Box>
                 </TableCell>
-                <TableCell>{row.email}</TableCell>
-                <TableCell>{row.date}</TableCell>
-                <TableCell>{row.salary}</TableCell>
-                <TableCell>{row.age}</TableCell>
+                <TableCell>{row.Type}</TableCell>
+                <TableCell>{row.Building}</TableCell>
+                <TableCell>{row.Level}</TableCell>
+                <TableCell>{row.Area}</TableCell>
+                <TableCell>{row.Mac}</TableCell>
+                <TableCell>{row.Datetime}</TableCell>
                 <TableCell>
                   <Chip
-                    label={row.status}
-                    color={statusObj[row.status].color}
+                    label={row.Use}
+                    color={statusObj[row.Use].color}
                     sx={{
                       height: 24,
                       fontSize: '0.75rem',

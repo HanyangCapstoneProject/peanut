@@ -7,7 +7,14 @@ const client = new Client({
   port: 5432,
 });
 client.connect();
-client.query("SELECT NOW()", (err, res) => {
-  console.log(err, res);
-  client.end();
-});
+
+const query = {
+  text: "SELECT * FROM alarm",
+};
+client
+  .query(query)
+  .then((res) => {
+    console.log(res.rows[0]);
+    client.end();
+  })
+  .catch((e) => console.error(e.stack));
