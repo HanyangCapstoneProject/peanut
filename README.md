@@ -6,5 +6,5 @@ $ npm run dev
 http://localhost:3000/    
      
 ### 2. react-native-version    
-$ npm expo start     
+$ npx expo start     
 http://localhost:19006/     
