@@ -23,13 +23,13 @@ const Dashboard = () => {
         <Grid item xs={12} md={8}>
           <Weather />
         </Grid>
-        <Grid item xs={12} md={6} lg={4}>
+        <Grid item xs={12} md={6}>
           <Analysis />
         </Grid>
-        <Grid item xs={12} md={6} lg={4}>
+        <Grid item xs={12} md={6}>
           <Predict />
         </Grid>
-        <Grid item xs={12} md={12} lg={8}>
+        <Grid item xs={12} md={12}>
           <DepositWithdraw />
         </Grid>
       </Grid>
