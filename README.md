@@ -1,11 +1,13 @@
 # 건설사고 안전관리 플랫폼
 
 ### 1. javascript-version   
-node-js, postgres
+웹 서비스   
+node-js, postgres    
 [original templat](https://themeselection.com/item/materio-free-vuetify-vuejs-laravel-admin-template/)    
 $ npm run dev    
 http://localhost:3000/    
      
 ### 2. react-native-version    
+앱 서비스   
 $ npx expo start     
 http://localhost:19006/     
