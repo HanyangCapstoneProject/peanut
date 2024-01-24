@@ -12,9 +12,9 @@ import TableContainer from '@mui/material/TableContainer';
 
 
 const statusObj = {
-  '사용': { color: 'success' },
-  '사용안함': { color: 'error' },
-  '미설치': { color: 'warning' }
+  1: { color: 'success' },
+  2: { color: 'error' },
+  3: { color: 'warning' }
 };
 
 const SensorsTable = () => {
@@ -42,9 +42,6 @@ const SensorsTable = () => {
             <TableRow>
               <TableCell>Sensor_code</TableCell>
               <TableCell>Type</TableCell>
-              <TableCell>Building</TableCell>
-              <TableCell>Level</TableCell>
-              <TableCell>Area</TableCell>
               <TableCell>Mac</TableCell>
               <TableCell>Datetime</TableCell>
               <TableCell>Use</TableCell>
@@ -55,15 +52,12 @@ const SensorsTable = () => {
               <TableRow key={row.Sensor_code}>
                 <TableCell>{row.Sensor_code}</TableCell>
                 <TableCell>{row.Type}</TableCell>
-                <TableCell>{row.Building}</TableCell>
-                <TableCell>{row.Level}</TableCell>
-                <TableCell>{row.Area}</TableCell>
                 <TableCell>{row.Mac}</TableCell>
                 <TableCell>{row.Datetime}</TableCell>
                 <TableCell>
                   <Chip
-                    label={row.Use}
-                    color={statusObj[row.Use].color}
+                    label={row.is_used}
+                    color={statusObj[row.is_used].color}
                     sx={{
                       height: 24,
                       fontSize: '0.75rem',
