@@ -1,7 +1,4 @@
-// ** React Imports
-import { forwardRef, useState } from 'react'
-
-// ** MUI Imports
+import React, { forwardRef, useState } from 'react'
 import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
@@ -10,74 +7,57 @@ import MenuItem from '@mui/material/MenuItem'
 import TextField from '@mui/material/TextField'
 import CardHeader from '@mui/material/CardHeader'
 import InputLabel from '@mui/material/InputLabel'
-import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 import CardActions from '@mui/material/CardActions'
 import FormControl from '@mui/material/FormControl'
-import OutlinedInput from '@mui/material/OutlinedInput'
-import InputAdornment from '@mui/material/InputAdornment'
 import Select from '@mui/material/Select'
-
-// ** Third Party Imports
 import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
-// ** Icons Imports
-import EyeOutline from 'mdi-material-ui/EyeOutline'
-import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
 
 const CustomInput = forwardRef((props, ref) => {
   return <TextField fullWidth {...props} inputRef={ref} label='센서 설치 일시' autoComplete='off' />
 })
 
 const FormLayoutsSeparator = () => {
-  // ** States
-  const [language, setLanguage] = useState([])
-  const [date, setDate] = useState(null)
+  // States
+  const [sensorNumber, setSensorNumber] = useState('')
+  const [sensorType, setSensorType] = useState('')
+  const [sensorStatus, setSensorStatus] = useState('')
+  const [sensorInstallationDate, setSensorInstallationDate] = useState(null)
 
-  const [values, setValues] = useState({
-    password: '',
-    password2: '',
-    showPassword: false,
-    showPassword2: false
-  })
-
-  // Handle Password
-  const handlePasswordChange = prop => event => {
-    setValues({ ...values, [prop]: event.target.value })
+  const handleSensorNumberChange = (event) => {
+    setSensorNumber(event.target.value)
   }
 
-  const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword })
+  const handleSensorTypeChange = (event) => {
+    setSensorType(event.target.value)
   }
 
-  const handleMouseDownPassword = event => {
-    event.preventDefault()
+  const handleSensorStatusChange = (event) => {
+    setSensorStatus(event.target.value)
   }
 
-  // Handle Confirm Password
-  const handleConfirmChange = prop => event => {
-    setValues({ ...values, [prop]: event.target.value })
+  const handleSensorInstallationDateChange = (date) => {
+    setSensorInstallationDate(date)
   }
 
-  const handleClickShowConfirmPassword = () => {
-    setValues({ ...values, showPassword2: !values.showPassword2 })
-  }
-
-  const handleMouseDownConfirmPassword = event => {
-    event.preventDefault()
-  }
-
-  // Handle Select
-  const handleSelectChange = event => {
-    setLanguage(event.target.value)
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    // 여기에서 폼을 제출하는 로직을 추가할 수 있습니다.
+    console.log('등록하기 버튼이 클릭되었습니다.')
+    console.log('센서 번호:', sensorNumber)
+    console.log('센서 종류:', sensorType)
+    console.log('센서 상태:', sensorStatus)
+    console.log('센서 설치 일시:', sensorInstallationDate)
   }
 
   return (
     <Card>
       <CardHeader title='센서 등록하기' titleTypographyProps={{ variant: 'h6' }} />
       <Divider sx={{ margin: 0 }} />
-      <form onSubmit={e => e.preventDefault()}>
+      <form onSubmit={handleSubmit}>
         <CardContent>
           <Grid container spacing={5}>
             <Grid item xs={12}>
@@ -87,18 +67,23 @@ const FormLayoutsSeparator = () => {
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label='센서 장치 번호' placeholder='carterLeonard' />
+              <TextField
+                fullWidth
+                label='센서 장치 번호'
+                placeholder='carterLeonard'
+                value={sensorNumber}
+                onChange={handleSensorNumberChange}
+              />
             </Grid>
 
-          
             <Grid item xs={12} sm={6}>
               <FormControl fullWidth>
-                <InputLabel id='form-layouts-separator-select-label'>센서 종류</InputLabel>
+                <InputLabel id='sensor-type-label'>센서 종류</InputLabel>
                 <Select
                   label='Type'
-                  defaultValue=''
-                  id='form-layouts-separator-select'
-                  labelId='form-layouts-separator-select-label'
+                  value={sensorType}
+                  onChange={handleSensorTypeChange}
+                  labelId='sensor-type-label'
                 >
                   <MenuItem value='온도'>온도</MenuItem>
                   <MenuItem value='습도'>습도</MenuItem>
@@ -108,12 +93,12 @@ const FormLayoutsSeparator = () => {
 
             <Grid item xs={12} sm={6}>
               <FormControl fullWidth>
-                <InputLabel id='form-layouts-separator-select-label'>센서 사용 여부</InputLabel>
+                <InputLabel id='sensor-status-label'>센서 사용 여부</InputLabel>
                 <Select
-                  label='Type'
-                  defaultValue=''
-                  id='form-layouts-separator-select'
-                  labelId='form-layouts-separator-select-label'
+                  label='Status'
+                  value={sensorStatus}
+                  onChange={handleSensorStatusChange}
+                  labelId='sensor-status-label'
                 >
                   <MenuItem value='사용'>사용</MenuItem>
                   <MenuItem value='사용 안함'>사용 안함</MenuItem>
@@ -124,16 +109,15 @@ const FormLayoutsSeparator = () => {
 
             <Grid item xs={12} sm={6}>
               <DatePicker
-                selected={date}
+                selected={sensorInstallationDate}
                 showYearDropdown
                 showMonthDropdown
                 placeholderText='MM-DD-YYYY'
                 customInput={<CustomInput />}
-                id='form-layouts-separator-date'
-                onChange={date => setDate(date)}
+                id='sensor-installation-date'
+                onChange={handleSensorInstallationDateChange}
               />
             </Grid>
-        
           </Grid>
         </CardContent>
         <Divider sx={{ margin: 0 }} />
