@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('path');
 
 module.exports = {
   trailingSlash: true,
@@ -11,8 +11,16 @@ module.exports = {
     config.resolve.alias = {
       ...config.resolve.alias,
       apexcharts: path.resolve(__dirname, './node_modules/apexcharts-clevision')
-    }
+    };
+    config.module.rules.push({
+      test: /\.scss$/,
+      use: [
+        'style-loader', // Adds CSS to the DOM by injecting a <style> tag
+        'css-loader', // interprets @import and url() like import/require() and will resolve them
+        'sass-loader' // Compiles Sass to CSS
+      ],
+    });
 
-    return config
-  }
-}
+    return config;
+  },
+};
