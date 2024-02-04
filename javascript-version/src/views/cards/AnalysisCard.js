@@ -14,7 +14,7 @@ import DotsVertical from 'mdi-material-ui/DotsVertical'
 // ** Custom Components Imports
 import ReactApexcharts from 'src/@core/components/react-apexcharts'
 
-const WeeklyOverview = () => {
+const AnalysisCard = () => {
   // ** Hook
   const theme = useTheme()
 
@@ -101,9 +101,12 @@ const WeeklyOverview = () => {
           </Typography>
           <Typography variant='body2'>Your sales performance is 45% 😎 better compared to last month</Typography>
         </Box>
+        <Button fullWidth variant='contained'>
+          분석 내용 확인하기
+        </Button>
       </CardContent>
     </Card>
   )
 }
 
-export default WeeklyOverview
+export default AnalysisCard

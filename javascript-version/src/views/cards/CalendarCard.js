@@ -109,7 +109,7 @@ const data = [
   }
 ]
 
-const TotalEarning = () => {
+const CalendarCard = () => {
   return (
     <Card>
       <CardHeader
@@ -136,4 +136,4 @@ const TotalEarning = () => {
   )
 }
 
-export default TotalEarning
+export default CalendarCard

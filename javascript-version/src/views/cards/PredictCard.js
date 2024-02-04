@@ -42,7 +42,7 @@ const data = [
   }
 ]
 
-const TotalEarning = () => {
+const PredictCard = () => {
   return (
     <Card>
       <CardHeader
@@ -123,4 +123,4 @@ const TotalEarning = () => {
   )
 }
 
-export default TotalEarning
+export default PredictCard

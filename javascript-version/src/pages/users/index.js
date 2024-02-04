@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography'
 // ** Demo Components Imports
 import UsersTable from 'src/views/tables/UsersTable'
 import AddUser from 'src/views/form-layouts/AddUser'
+import TableStickyHeader from 'src/views/tables/TableStickyHeader'
 
 const MUITable = () => {
   return (
@@ -21,6 +22,9 @@ const MUITable = () => {
       </Grid>
       <Grid item xs={12}>
           <UsersTable />
+        </Grid>
+        <Grid item xs={12}>
+          <TableStickyHeader />
         </Grid>
       <Grid item xs={12}>
           <AddUser />

@@ -104,7 +104,7 @@ const Divider = styled(MuiDivider)(({ theme }) => ({
   }
 }))
 
-const DepositWithdraw = () => {
+const CalendarBrief = () => {
   return (
     <Card sx={{ display: 'flex', justifyContent: 'space-between', flexDirection: ['column', 'column', 'row'] }}>
       <Box sx={{ width: '100%' }}>
@@ -200,4 +200,4 @@ const DepositWithdraw = () => {
   )
 }
 
-export default DepositWithdraw
+export default CalendarBrief
