@@ -1,17 +1,17 @@
 // ** React Imports
-import { useState, Fragment } from 'react'
+import { useState } from 'react'
 
 // ** Next Imports
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 // ** MUI Components
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
-import Divider from '@mui/material/Divider'
 import Checkbox from '@mui/material/Checkbox'
 import TextField from '@mui/material/TextField'
-import Typography from '@mui/material/Typography'
 import InputLabel from '@mui/material/InputLabel'
+import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import CardContent from '@mui/material/CardContent'
 import FormControl from '@mui/material/FormControl'
@@ -22,10 +22,6 @@ import InputAdornment from '@mui/material/InputAdornment'
 import MuiFormControlLabel from '@mui/material/FormControlLabel'
 
 // ** Icons Imports
-import Google from 'mdi-material-ui/Google'
-import Github from 'mdi-material-ui/Github'
-import Twitter from 'mdi-material-ui/Twitter'
-import Facebook from 'mdi-material-ui/Facebook'
 import EyeOutline from 'mdi-material-ui/EyeOutline'
 import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
 
@@ -50,16 +46,14 @@ const LinkStyled = styled('a')(({ theme }) => ({
 }))
 
 const FormControlLabel = styled(MuiFormControlLabel)(({ theme }) => ({
-  marginTop: theme.spacing(1.5),
-  marginBottom: theme.spacing(4),
   '& .MuiFormControlLabel-label': {
     fontSize: '0.875rem',
     color: theme.palette.text.secondary
   }
 }))
 
-const RegisterPage = () => {
-  // ** States
+const LoginPage = () => {
+  // ** State
   const [values, setValues] = useState({
     password: '',
     showPassword: false
@@ -67,6 +61,7 @@ const RegisterPage = () => {
 
   // ** Hook
   const theme = useTheme()
+  const router = useRouter()
 
   const handleChange = prop => event => {
     setValues({ ...values, [prop]: event.target.value })
@@ -159,19 +154,18 @@ const RegisterPage = () => {
           </Box>
           <Box sx={{ mb: 6 }}>
             <Typography variant='h5' sx={{ fontWeight: 600, marginBottom: 1.5 }}>
-              Adventure starts here 🚀
+              오늘도 {themeConfig.templateName}! 👋🏻
             </Typography>
-            <Typography variant='body2'>Make your app management easy and fun!</Typography>
+            <Typography variant='body2'>로그인하시고 안전한 건설 현장 화이팅 입니다. 하하</Typography>
           </Box>
           <form noValidate autoComplete='off' onSubmit={e => e.preventDefault()}>
-            <TextField autoFocus fullWidth id='username' label='Username' sx={{ marginBottom: 4 }} />
-            <TextField fullWidth type='email' label='Email' sx={{ marginBottom: 4 }} />
+            <TextField autoFocus fullWidth id='email' label='Email' sx={{ marginBottom: 4 }} />
             <FormControl fullWidth>
-              <InputLabel htmlFor='auth-register-password'>Password</InputLabel>
+              <InputLabel htmlFor='auth-login-password'>Password</InputLabel>
               <OutlinedInput
                 label='Password'
                 value={values.password}
-                id='auth-register-password'
+                id='auth-login-password'
                 onChange={handleChange('password')}
                 type={values.showPassword ? 'text' : 'password'}
                 endAdornment={
@@ -182,60 +176,33 @@ const RegisterPage = () => {
                       onMouseDown={handleMouseDownPassword}
                       aria-label='toggle password visibility'
                     >
-                      {values.showPassword ? <EyeOutline fontSize='small' /> : <EyeOffOutline fontSize='small' />}
+                      {values.showPassword ? <EyeOutline /> : <EyeOffOutline />}
                     </IconButton>
                   </InputAdornment>
                 }
               />
             </FormControl>
-            <FormControlLabel
-              control={<Checkbox />}
-              label={
-                <Fragment>
-                  <span>I agree to </span>
-                  <Link href='/' passHref>
-                    <LinkStyled onClick={e => e.preventDefault()}>privacy policy & terms</LinkStyled>
-                  </Link>
-                </Fragment>
-              }
-            />
-            <Button fullWidth size='large' type='submit' variant='contained' sx={{ marginBottom: 7 }}>
-              Sign up
+            <Box
+              sx={{ mb: 4, display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-between' }}
+            >
+              <FormControlLabel control={<Checkbox />} label='Remember Me' />
+              <Link passHref href='/'>
+                <LinkStyled onClick={e => e.preventDefault()}>비밀번호 재설정하기</LinkStyled>
+              </Link>
+            </Box>
+            <Button
+              fullWidth
+              size='large'
+              variant='contained'
+              sx={{ marginBottom: 7 }}
+              onClick={() => router.push('/')}
+            >
+              Login
             </Button>
             <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
               <Typography variant='body2' sx={{ marginRight: 2 }}>
-                Already have an account?
+                신규 사용자는 관리자에게 문의하세요.
               </Typography>
-              <Typography variant='body2'>
-                <Link passHref href='/pages/login'>
-                  <LinkStyled>Sign in instead</LinkStyled>
-                </Link>
-              </Typography>
-            </Box>
-            <Divider sx={{ my: 5 }}>or</Divider>
-            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Link href='/' passHref>
-                <IconButton component='a' onClick={e => e.preventDefault()}>
-                  <Facebook sx={{ color: '#497ce2' }} />
-                </IconButton>
-              </Link>
-              <Link href='/' passHref>
-                <IconButton component='a' onClick={e => e.preventDefault()}>
-                  <Twitter sx={{ color: '#1da1f2' }} />
-                </IconButton>
-              </Link>
-              <Link href='/' passHref>
-                <IconButton component='a' onClick={e => e.preventDefault()}>
-                  <Github
-                    sx={{ color: theme => (theme.palette.mode === 'light' ? '#272727' : theme.palette.grey[300]) }}
-                  />
-                </IconButton>
-              </Link>
-              <Link href='/' passHref>
-                <IconButton component='a' onClick={e => e.preventDefault()}>
-                  <Google sx={{ color: '#db4437' }} />
-                </IconButton>
-              </Link>
             </Box>
           </form>
         </CardContent>
@@ -244,6 +211,6 @@ const RegisterPage = () => {
     </Box>
   )
 }
-RegisterPage.getLayout = page => <BlankLayout>{page}</BlankLayout>
+LoginPage.getLayout = page => <BlankLayout>{page}</BlankLayout>
 
-export default RegisterPage
+export default LoginPage

@@ -48,6 +48,11 @@ const navigation = () => {
       sectionTitle: '앱에서만 구동될 서비스'
     },
     {
+      title: '로그인',
+      icon: AlertCircleOutline,
+      path: '/auth'
+    },
+    {
       title: '센싱',
       icon: AlertCircleOutline,
       path: '/sensing'
