@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography'
 // ** Demo Components Imports
 import UsersTable from 'src/views/tables/UsersTable'
 import AddUser from 'src/views/form-layouts/AddUser'
-import TableStickyHeader from 'src/views/tables/TableStickyHeader'
 
 const MUITable = () => {
   return (
@@ -18,13 +17,10 @@ const MUITable = () => {
             사용자 관리
           </Link>
         </Typography>
-        <Typography variant='body2'>Tables display sets of data. They can be fully customized</Typography>
+        <Typography variant='body2'>사용자 관리 페이지입니다</Typography>
       </Grid>
       <Grid item xs={12}>
           <UsersTable />
-        </Grid>
-        <Grid item xs={12}>
-          <TableStickyHeader />
         </Grid>
       <Grid item xs={12}>
           <AddUser />

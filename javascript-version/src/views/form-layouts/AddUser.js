@@ -1,5 +1,6 @@
 // ** React Imports
-import { forwardRef, useState } from 'react'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 // ** MUI Imports
 import Card from '@mui/material/Card'
@@ -26,29 +27,39 @@ import DatePicker from 'react-datepicker'
 import EyeOutline from 'mdi-material-ui/EyeOutline'
 import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
 
-const CustomInput = forwardRef((props, ref) => {
-  return <TextField fullWidth {...props} inputRef={ref} label='Birth Date' autoComplete='off' />
-})
 
 const FormLayoutsSeparator = () => {
   // ** States
-  const [language, setLanguage] = useState([])
-  const [date, setDate] = useState(null)
+  const [userName, setuserName] = useState('');
+  const [userPnum, setuserPnum] = useState('');
+  const [userAuthority, setuserAuthority] = useState('');
 
-  const [values, setValues] = useState({
+  const [userPw, setuserPw] = useState({
     password: '',
     password2: '',
     showPassword: false,
     showPassword2: false
   })
 
+  const handleUserNameChange = (event) => {
+    setuserName(event.target.value);
+  };
+
+  const handleUserPnumChange = (event) => {
+    setuserPnum(event.target.value);
+  };
+
+  const handleuserAuthorityChange = (event) => {
+    setuserAuthority(event.target.value);
+  };
+
   // Handle Password
   const handlePasswordChange = prop => event => {
-    setValues({ ...values, [prop]: event.target.value })
+    setuserPw({ ...userPw, [prop]: event.target.value })
   }
 
   const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword })
+    setuserPw({ ...userPw, showPassword: !userPw.showPassword })
   }
 
   const handleMouseDownPassword = event => {
@@ -57,27 +68,45 @@ const FormLayoutsSeparator = () => {
 
   // Handle Confirm Password
   const handleConfirmChange = prop => event => {
-    setValues({ ...values, [prop]: event.target.value })
+    setuserPw({ ...userPw, [prop]: event.target.value })
   }
 
   const handleClickShowConfirmPassword = () => {
-    setValues({ ...values, showPassword2: !values.showPassword2 })
+    setuserPw({ ...userPw, showPassword2: !userPw.showPassword2 })
   }
 
   const handleMouseDownConfirmPassword = event => {
     event.preventDefault()
   }
 
-  // Handle Select
-  const handleSelectChange = event => {
-    setLanguage(event.target.value)
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (userPw.password !== userPw.password2) {
+      console.error('비밀번호가 일치하지 않습니다.');
+      // 오류 처리 로직 추가
+      return;
+    }
+
+    try {
+      const response = await axios.post('/api/data_user', {
+        userName,
+        userPnum,
+        userAuthority,
+        userPw
+      });
+      console.log('데이터가 성공적으로 전송되었습니다.');
+      // 성공적으로 데이터를 전송한 후에 수행할 로직 추가
+    } catch (error) {
+      console.error('데이터 전송 중 오류가 발생했습니다:', error);
+      // 데이터 전송 중 오류가 발생했을 때의 처리 로직 추가
+    }
+  };
 
   return (
     <Card>
       <CardHeader title='사용자 등록하기' titleTypographyProps={{ variant: 'h6' }} />
       <Divider sx={{ margin: 0 }} />
-      <form onSubmit={e => e.preventDefault()}>
+      <form onSubmit={handleSubmit}>
         <CardContent>
           <Grid container spacing={5}>
             <Grid item xs={12}>
@@ -86,11 +115,21 @@ const FormLayoutsSeparator = () => {
               </Typography>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label='사용자 이름' placeholder='홍길동' />
+              <TextField 
+                fullWidth label='사용자 이름'
+                placeholder='홍길동'
+                value={userName}
+                onChange={handleUserNameChange}
+                />
             </Grid>
              
             <Grid item xs={12} sm={6}>
-              <TextField fullWidth label='전화번호(아이디)' placeholder='010-1234-5678' />
+              <TextField 
+                fullWidth label='전화번호(아이디)' 
+                placeholder='010-1234-5678' 
+                value={userPnum}
+                onChange={handleUserPnumChange}
+                />
             </Grid>
            
             <Grid item xs={12} sm={6}>
@@ -98,10 +137,10 @@ const FormLayoutsSeparator = () => {
                 <InputLabel htmlFor='form-layouts-separator-password'>비밀번호</InputLabel>
                 <OutlinedInput
                   label='Password'
-                  value={values.password}
+                  value={userPw.password}
                   id='form-layouts-separator-password'
                   onChange={handlePasswordChange('password')}
-                  type={values.showPassword ? 'text' : 'password'}
+                  type={userPw.showPassword ? 'text' : 'password'}
                   endAdornment={
                     <InputAdornment position='end'>
                       <IconButton
@@ -110,7 +149,7 @@ const FormLayoutsSeparator = () => {
                         onMouseDown={handleMouseDownPassword}
                         aria-label='toggle password visibility'
                       >
-                        {values.showPassword ? <EyeOutline /> : <EyeOffOutline />}
+                        {userPw.showPassword ? <EyeOutline /> : <EyeOffOutline />}
                       </IconButton>
                     </InputAdornment>
                   }
@@ -121,11 +160,11 @@ const FormLayoutsSeparator = () => {
               <FormControl fullWidth>
                 <InputLabel htmlFor='form-layouts-separator-password-2'>비밀번호 확인</InputLabel>
                 <OutlinedInput
-                  value={values.password2}
+                  value={userPw.password2}
                   label='Confirm Password'
                   id='form-layouts-separator-password-2'
                   onChange={handleConfirmChange('password2')}
-                  type={values.showPassword2 ? 'text' : 'password'}
+                  type={userPw.showPassword2 ? 'text' : 'password'}
                   endAdornment={
                     <InputAdornment position='end'>
                       <IconButton
@@ -134,7 +173,7 @@ const FormLayoutsSeparator = () => {
                         onClick={handleClickShowConfirmPassword}
                         onMouseDown={handleMouseDownConfirmPassword}
                       >
-                        {values.showPassword2 ? <EyeOutline /> : <EyeOffOutline />}
+                        {userPw.showPassword2 ? <EyeOutline /> : <EyeOffOutline />}
                       </IconButton>
                     </InputAdornment>
                   }
@@ -142,8 +181,6 @@ const FormLayoutsSeparator = () => {
               </FormControl>
             </Grid>
            
-           
-          
             <Grid item xs={12} sm={6}>
               <FormControl fullWidth>
                 <InputLabel id='form-layouts-separator-select-label'>권한</InputLabel>
@@ -152,9 +189,11 @@ const FormLayoutsSeparator = () => {
                   defaultValue=''
                   id='form-layouts-separator-select'
                   labelId='form-layouts-separator-select-label'
+                  value={userAuthority}
+                  onChange={handleuserAuthorityChange}
                 >
-                  <MenuItem value='일반 사용자'>일반 사용자</MenuItem>
-                  <MenuItem value='관리자'>관리자</MenuItem>
+                  <MenuItem value='false'>일반 사용자</MenuItem>
+                  <MenuItem value='true'>관리자</MenuItem>
                  
                 </Select>
               </FormControl>
