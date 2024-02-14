@@ -27,7 +27,7 @@ function SensorsTable() {
         if (response.status === 200) {
           const jsonData = response.data;
           setSensorT(Array.isArray(jsonData.sensor_t) ? jsonData.sensor_t : [jsonData.sensor_t]);
-          // console.log(jsonData);
+          console.log(sensor_t);
         } else {
           console.error('Failed to fetch data');
         }

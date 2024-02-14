@@ -43,9 +43,7 @@
     "lint": "eslint --fix \"src/**/*.{js,jsx}\"",
     "format": "prettier --write \"src/**/*.{js,jsx}\""
   },
-
   "proxy": "http://localhost:8089",
-  
   "dependencies": {
     "@emotion/cache": "^11.6.0",
     "@emotion/react": "^11.7.0",
@@ -58,7 +56,6 @@
     "axios": "^1.6.7",
     "babel-eslint": "^10.1.0",
     "clsx": "^1.1.1",
-    "css-loader": "^6.10.0",
     "eslint-plugin-react": "^7.29.4",
     "mdi-material-ui": "^7.1.0",
     "moment": "^2.30.1",
@@ -74,10 +71,10 @@
     "react-popper": "^2.2.5",
     "saas": "^1.0.0",
     "sass": "^1.70.0",
-    "sass-loader": "^14.1.0",
-    "style-loader": "^3.3.4"
+    "sass-loader": "^14.1.0"
   },
   "devDependencies": {
+    "css-loader": "^6.10.0",
     "eslint": "^7.32.0",
     "eslint-config-next": "12.0.4",
     "eslint-config-prettier": "^8.3.0",
@@ -85,6 +82,7 @@
     "eslint-import-resolver-typescript": "^2.5.0",
     "eslint-plugin-import": "^2.25.4",
     "next-transpile-modules": "^9.0.0",
-    "prettier": "2.5.1"
+    "prettier": "2.5.1",
+    "style-loader": "^3.3.4"
   }
 }
