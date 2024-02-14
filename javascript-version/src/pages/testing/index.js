@@ -1,18 +1,20 @@
+// src/pages/testing/index.js
 import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
+import axios from 'axios'; // axios 추가
 
 const TestingPage = () => {
-    const [data, setData] = useState(null);
+    const [message, setMessage] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('/api/test1'); // API Route 경로를 사용하여 데이터를 가져옵니다.
-                if (response.ok) {
-                    const jsonData = await response.json();
-                    setData(jsonData);
+                const response = await axios.get('/api/test1'); // axios로 변경
+                if (response.status === 200) { // 응답 상태 코드 확인
+                    setMessage(response.data); // 데이터를 바로 설정
+                    console.log(response.data) // 변경된 데이터 로깅
                 } else {
                     console.error('Failed to fetch data');
                 }
@@ -33,7 +35,7 @@ const TestingPage = () => {
                     </Link>
                 </Typography>
                 <Typography variant='body2'>
-                    {data && data} {/* 데이터를 보여줍니다. */}
+                    {message} {/* 데이터를 보여줍니다. */}
                 </Typography>
             </Grid>
         </Grid>
@@ -41,4 +43,5 @@ const TestingPage = () => {
 };
 
 export default TestingPage;
+
 
