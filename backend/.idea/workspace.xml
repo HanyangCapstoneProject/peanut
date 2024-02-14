@@ -1,19 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="37da59ca-b501-4099-8b5e-ad8fb49e2eef" name="Changes" comment="" />
+    <list default="true" id="06e953b4-22dc-418c-8488-4b128e462964" name="변경" comment="">
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/java/com/example/demo/HelloController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../demo/src/main/java/com/example/demo/PostgreSQLConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/maven/archetype.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/archetype-resources/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/archetype-resources/src/main/java/App.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/archetype-resources/src/test/java/AppTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../demo/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../demo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../demo/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../javascript-version/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../javascript-version/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../javascript-version/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../javascript-version/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../javascript-version/src/navigation/vertical/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../javascript-version/src/navigation/vertical/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../javascript-version/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../javascript-version/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot/src/main/java/com/example/springboot/SpringbootApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot/src/main/java/com/example/springboot/SpringbootApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../springboot/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../springboot/src/main/resources/application.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
   "associatedIndex": 0
 }]]></component>
-  <component name="ProjectId" id="2cJ4E8qp31Ea9cvNbBRhUv9lv1x" />
+  <component name="ProjectId" id="2cLGza2AMa2nxEFjFqjqNjeVOM6" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -26,15 +48,19 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="37da59ca-b501-4099-8b5e-ad8fb49e2eef" name="Changes" comment="" />
-      <created>1707816235435</created>
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="06e953b4-22dc-418c-8488-4b128e462964" name="변경" comment="" />
+      <created>1707883708516</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1707816235435</updated>
+      <updated>1707883708516</updated>
+      <workItem from="1707883709538" duration="3000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>

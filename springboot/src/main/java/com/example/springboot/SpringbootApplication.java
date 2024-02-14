@@ -176,6 +176,7 @@ public class SpringbootApplication {
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
+		SpringApplication.run(SpringBootApplication.class, args);
 		SpringbootApplication application = new SpringbootApplication();
 		Connection conn = application.task1();
 

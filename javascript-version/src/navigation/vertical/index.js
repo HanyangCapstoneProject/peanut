@@ -57,6 +57,11 @@ const navigation = () => {
       icon: AlertCircleOutline,
       path: '/sensing'
     },
+    {
+      title: '백엔드 테스트',
+      icon: AlertCircleOutline,
+      path: '/testing'
+    },
   ]
 }
 

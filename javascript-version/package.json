@@ -43,6 +43,7 @@
     "lint": "eslint --fix \"src/**/*.{js,jsx}\"",
     "format": "prettier --write \"src/**/*.{js,jsx}\""
   },
+  "proxy": "http://localhost:8089",
   "dependencies": {
     "@emotion/cache": "^11.6.0",
     "@emotion/react": "^11.7.0",
@@ -52,6 +53,7 @@
     "@mui/material": "^5.4.3",
     "@popperjs/core": "^2.11.2",
     "apexcharts-clevision": "3.28.5",
+    "axios": "^1.6.7",
     "babel-eslint": "^10.1.0",
     "clsx": "^1.1.1",
     "css-loader": "^6.10.0",
