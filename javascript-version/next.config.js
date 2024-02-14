@@ -1,12 +1,21 @@
 const path = require('path');
 
 module.exports = {
+  async rewrites() {
+    return [
+      {
+        source: '/api/test1',
+        destination: 'https://localhost:8089/api/test1',
+      },
+    ]
+  },
   trailingSlash: true,
   reactStrictMode: false,
   experimental: {
     esmExternals: false,
     jsconfigPaths: true // enables it for both jsconfig.json and tsconfig.json
   },
+
   webpack: config => {
     config.resolve.alias = {
       ...config.resolve.alias,
