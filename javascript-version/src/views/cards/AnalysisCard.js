@@ -75,7 +75,7 @@ const AnalysisCard = () => {
       tickAmount: 4,
       labels: {
         offsetX: -17,
-        formatter: value => `${value > 999 ? `${(value / 1000).toFixed(0)}` : value}k`
+        formatter: value => `${value > 999 ? `${(value / 1000).toFixed(0)}` : value}%`
       }
     }
   }
@@ -99,7 +99,7 @@ const AnalysisCard = () => {
           <Typography variant='h5' sx={{ mr: 4 }}>
             45%
           </Typography>
-          <Typography variant='body2'>Your sales performance is 45% 😎 better compared to last month</Typography>
+          <Typography variant='body2'>진행중</Typography>
         </Box>
         <Button fullWidth variant='contained'>
           분석 내용 확인하기

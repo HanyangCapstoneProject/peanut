@@ -9,36 +9,40 @@ import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 
 // ** Icons Imports
-import TrendingUp from 'mdi-material-ui/TrendingUp'
-import CurrencyUsd from 'mdi-material-ui/CurrencyUsd'
+import WeatherCloudy from 'mdi-material-ui/WeatherCloudy'
+import WeatherWindy from 'mdi-material-ui/WeatherWindy'
+import TemperatureCelsius from 'mdi-material-ui/TemperatureCelsius'
 import DotsVertical from 'mdi-material-ui/DotsVertical'
-import CellphoneLink from 'mdi-material-ui/CellphoneLink'
-import AccountOutline from 'mdi-material-ui/AccountOutline'
+import CurrencyUsd from 'mdi-material-ui/WeatherHurricane'
+import WeatherRainy from 'mdi-material-ui/WeatherRainy'
+
+
+
 
 const salesData = [
   {
-    stats: '245k',
-    title: 'Sales',
+    stats: '15°C',
+    title: '기온',
     color: 'primary',
-    icon: <TrendingUp sx={{ fontSize: '1.75rem' }} />
+    icon: <TemperatureCelsius sx={{ fontSize: '1.75rem'}} />
   },
   {
-    stats: '12.5k',
-    title: 'Customers',
+    stats: '70%',
+    title: '습도',
     color: 'success',
-    icon: <AccountOutline sx={{ fontSize: '1.75rem' }} />
+    icon: <WeatherRainy sx={{ fontSize: '1.75rem' }} />
   },
   {
-    stats: '1.54k',
+    stats: '6',
     color: 'warning',
-    title: 'Products',
-    icon: <CellphoneLink sx={{ fontSize: '1.75rem' }} />
+    title: '바람',
+    icon: <WeatherWindy sx={{ fontSize: '1.75rem' }} />
   },
   {
-    stats: '$88k',
+    stats: '',
     color: 'info',
-    title: 'Revenue',
-    icon: <CurrencyUsd sx={{ fontSize: '1.75rem' }} />
+    title: '구름',
+    icon: <WeatherCloudy sx={{ fontSize: '1.75rem' }} />
   }
 ]
 
@@ -81,9 +85,9 @@ const StatisticsCard = () => {
         subheader={
           <Typography variant='body2'>
             <Box component='span' sx={{ fontWeight: 600, color: 'text.primary' }}>
-              Total 48.5% growth
+              흐린 후 맑음🌤
             </Box>{' '}
-            😎 this month
+            
           </Typography>
         }
         titleTypographyProps={{

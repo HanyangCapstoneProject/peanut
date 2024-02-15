@@ -14,31 +14,31 @@ import DotsVertical from 'mdi-material-ui/DotsVertical'
 
 const data = [
   {
-    progress: 75,
+    progress: 0,
     imgHeight: 20,
-    title: 'Zipcar',
+    title: '다음 타설 예정일',
     color: 'primary',
-    amount: '$24,895.65',
-    subtitle: 'Vuejs, React & HTML',
-    imgSrc: '/images/cards/logo-zipcar.png'
+    amount: '2024.01.25',
+    subtitle: '2024.01.25',
+    imgSrc: '/images/logos/check.png'
   },
   {
-    progress: 50,
+    progress: 25,
     color: 'info',
-    imgHeight: 27,
-    title: 'Bitbank',
-    amount: '$8,650.20',
-    subtitle: 'Sketch, Figma & XD',
-    imgSrc: '/images/cards/logo-bitbank.png'
+    imgHeight: 20,
+    title: '중간 점검 작업',
+    amount: '2024.01.24',
+    subtitle: '2024.01.04',
+    imgSrc: '/images/logos/check.png'
   },
   {
-    progress: 20,
+    progress: 90,
     imgHeight: 20,
-    title: 'Aviato',
+    title: '양생 작업',
     color: 'secondary',
-    amount: '$1,245.80',
-    subtitle: 'HTML & Angular',
-    imgSrc: '/images/cards/logo-aviato.png'
+    amount: '2023.12.28',
+    subtitle: '2024.01.02',
+    imgSrc: '/images/logos/check.png'
   }
 ]
 
@@ -68,7 +68,7 @@ const PredictCard = () => {
         </Box>
 
         <Typography component='p' variant='caption' sx={{ mb: 10 }}>
-          Compared to $84,325 last year
+          
         </Typography>
 
         {data.map((item, index) => {

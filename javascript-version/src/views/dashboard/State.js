@@ -31,16 +31,16 @@ const Trophy = () => {
       <CardContent>
         <Typography variant='h6'>강남구 힐스테이트</Typography>
         <Typography variant='body2' sx={{ letterSpacing: '0.25px' }}>
-          Best seller of the month
+          KDS 41 10 00:2014
         </Typography>
         <Typography variant='h5' sx={{ my: 4, color: 'primary.main' }}>
-          $42.8k
+          2024.01.08
         </Typography>
         <Button size='small' variant='contained'>
-          View Sales
+          현장정보
         </Button>
         <TriangleImg alt='triangle background' src={`/images/misc/${imageSrc}`} />
-        <TrophyImg alt='trophy' src='/images/misc/trophy.png' />
+        <TrophyImg alt='trophy' src='\images\misc\free-icon-building-6017722.png' />
       </CardContent>
     </Card>
   )
