@@ -30,23 +30,23 @@ import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
 
 const FormLayoutsSeparator = () => {
   // ** States
-  const [userName, setuserName] = useState('');
-  const [userPnum, setuserPnum] = useState('');
-  const [userAuthority, setuserAuthority] = useState('');
+  const [users_id, setuserId] = useState('');
+  const [users_name, setuserName] = useState('');
+  const [users_authority, setuserAuthority] = useState('');
 
-  const [userPw, setuserPw] = useState({
+  const [users_pw, setuserPw] = useState({
     password: '',
     password2: '',
     showPassword: false,
     showPassword2: false
   })
 
-  const handleUserNameChange = (event) => {
-    setuserName(event.target.value);
+  const handleUserIdChange = (event) => {
+    setuserId(event.target.value);
   };
 
-  const handleUserPnumChange = (event) => {
-    setuserPnum(event.target.value);
+  const handleUserNameChange = (event) => {
+    setuserName(event.target.value);
   };
 
   const handleuserAuthorityChange = (event) => {
@@ -55,11 +55,11 @@ const FormLayoutsSeparator = () => {
 
   // Handle Password
   const handlePasswordChange = prop => event => {
-    setuserPw({ ...userPw, [prop]: event.target.value })
+    setuserPw({ ...users_pw, [prop]: event.target.value })
   }
 
   const handleClickShowPassword = () => {
-    setuserPw({ ...userPw, showPassword: !userPw.showPassword })
+    setuserPw({ ...users_pw, showPassword: !users_pw.showPassword })
   }
 
   const handleMouseDownPassword = event => {
@@ -68,11 +68,11 @@ const FormLayoutsSeparator = () => {
 
   // Handle Confirm Password
   const handleConfirmChange = prop => event => {
-    setuserPw({ ...userPw, [prop]: event.target.value })
+    setuserPw({ ...users_pw, [prop]: event.target.value })
   }
 
   const handleClickShowConfirmPassword = () => {
-    setuserPw({ ...userPw, showPassword2: !userPw.showPassword2 })
+    setuserPw({ ...users_pw, showPassword2: !users_pw.showPassword2 })
   }
 
   const handleMouseDownConfirmPassword = event => {
@@ -81,7 +81,7 @@ const FormLayoutsSeparator = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (userPw.password !== userPw.password2) {
+    if (users_pw.password !== users_pw.password2) {
       console.error('비밀번호가 일치하지 않습니다.');
       // 오류 처리 로직 추가
       return;
@@ -89,10 +89,10 @@ const FormLayoutsSeparator = () => {
 
     try {
       const response = await axios.post('/api/data_user', {
-        userName,
-        userPnum,
-        userAuthority,
-        userPw
+        users_id: users_id,
+        users_pw: users_pw,
+        users_name: users_name,
+        users_authority: users_authority
       });
       console.log('데이터가 성공적으로 전송되었습니다.');
       // 성공적으로 데이터를 전송한 후에 수행할 로직 추가
@@ -118,7 +118,7 @@ const FormLayoutsSeparator = () => {
               <TextField 
                 fullWidth label='사용자 이름'
                 placeholder='홍길동'
-                value={userName}
+                value={users_name}
                 onChange={handleUserNameChange}
                 />
             </Grid>
@@ -127,8 +127,8 @@ const FormLayoutsSeparator = () => {
               <TextField 
                 fullWidth label='전화번호(아이디)' 
                 placeholder='010-1234-5678' 
-                value={userPnum}
-                onChange={handleUserPnumChange}
+                value={users_id}
+                onChange={handleUserIdChange}
                 />
             </Grid>
            
@@ -137,10 +137,10 @@ const FormLayoutsSeparator = () => {
                 <InputLabel htmlFor='form-layouts-separator-password'>비밀번호</InputLabel>
                 <OutlinedInput
                   label='Password'
-                  value={userPw.password}
+                  value={users_pw.password}
                   id='form-layouts-separator-password'
                   onChange={handlePasswordChange('password')}
-                  type={userPw.showPassword ? 'text' : 'password'}
+                  type={users_pw.showPassword ? 'text' : 'password'}
                   endAdornment={
                     <InputAdornment position='end'>
                       <IconButton
@@ -149,7 +149,7 @@ const FormLayoutsSeparator = () => {
                         onMouseDown={handleMouseDownPassword}
                         aria-label='toggle password visibility'
                       >
-                        {userPw.showPassword ? <EyeOutline /> : <EyeOffOutline />}
+                        {users_pw.showPassword ? <EyeOutline /> : <EyeOffOutline />}
                       </IconButton>
                     </InputAdornment>
                   }
@@ -160,11 +160,11 @@ const FormLayoutsSeparator = () => {
               <FormControl fullWidth>
                 <InputLabel htmlFor='form-layouts-separator-password-2'>비밀번호 확인</InputLabel>
                 <OutlinedInput
-                  value={userPw.password2}
+                  value={users_pw.password2}
                   label='Confirm Password'
                   id='form-layouts-separator-password-2'
                   onChange={handleConfirmChange('password2')}
-                  type={userPw.showPassword2 ? 'text' : 'password'}
+                  type={users_pw.showPassword2 ? 'text' : 'password'}
                   endAdornment={
                     <InputAdornment position='end'>
                       <IconButton
@@ -173,7 +173,7 @@ const FormLayoutsSeparator = () => {
                         onClick={handleClickShowConfirmPassword}
                         onMouseDown={handleMouseDownConfirmPassword}
                       >
-                        {userPw.showPassword2 ? <EyeOutline /> : <EyeOffOutline />}
+                        {users_pw.showPassword2 ? <EyeOutline /> : <EyeOffOutline />}
                       </IconButton>
                     </InputAdornment>
                   }
@@ -189,7 +189,7 @@ const FormLayoutsSeparator = () => {
                   defaultValue=''
                   id='form-layouts-separator-select'
                   labelId='form-layouts-separator-select-label'
-                  value={userAuthority}
+                  value={users_authority}
                   onChange={handleuserAuthorityChange}
                 >
                   <MenuItem value='false'>일반 사용자</MenuItem>

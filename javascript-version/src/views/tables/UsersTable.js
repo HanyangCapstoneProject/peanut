@@ -42,27 +42,28 @@ function UsersTable() {
         <Table sx={{ minWidth: 800 }} aria-label='table in dashboard'>
           <TableHead>
             <TableRow>
-              <TableCell>이름</TableCell>
-              <TableCell>전화번호</TableCell>
-              <TableCell>비밀번호</TableCell>
-              <TableCell>권한</TableCell>
+              <TableCell align="center">번호</TableCell> 
+              <TableCell align="center">이름</TableCell>
+              <TableCell align="center">전화번호</TableCell>
+              <TableCell align="center">비밀번호</TableCell>
+              <TableCell align="center">권한</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {user_t.map(row => (
-              <TableRow hover key={row.user_name} sx={{ '&:last-of-type td, &:last-of-type th': { border: 0 } }}>
-                <TableCell sx={{ py: theme => `${theme.spacing(0.5)} !important` }}>{row.user_name}</TableCell>
-                <TableCell>{row.phone_id}</TableCell>
-                <TableCell>{row.passwd}</TableCell>
+              <TableRow key={row.users_key}>
+                <TableCell sx={{ fontSize: '1rem', color: 'black' }} align="center">{row.users_key}</TableCell>
+                <TableCell sx={{ fontSize: '1rem', color: 'black' }} align="center">{row.users_name}</TableCell>
+                <TableCell sx={{ fontSize: '1rem', color: 'black' }} align="center">{row.users_id}</TableCell>
+                <TableCell sx={{ fontSize: '1rem', color: 'black' }} align="center">{row.users_pw}</TableCell>
                 <TableCell>
                   <Chip
-                    label={row.authority}
-                    color={statusObj[row.authority].color}
+                    label={row.users_authority}
+                    color={statusObj[row.users_authority].color}
                     sx={{
                       height: 24,
-                      fontSize: '0.75rem',
-                      textTransform: 'capitalize',
-                      '& .MuiChip-label': { fontWeight: 500 }
+                      '& .MuiChip-label': { fontWeight: 500 },
+                      justifyContent: 'center', alignItems: 'center'
                     }}
                   />
                 </TableCell>

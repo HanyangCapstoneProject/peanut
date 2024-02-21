@@ -14,7 +14,7 @@ import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-
+import axios from 'axios';
 
 const CustomInput = forwardRef((props, ref) => {
   return <TextField fullWidth {...props} inputRef={ref} label='센서 설치 일시' autoComplete='off' />
@@ -22,37 +22,50 @@ const CustomInput = forwardRef((props, ref) => {
 
 const FormLayoutsSeparator = () => {
   // States
-  const [sensorNumber, setSensorNumber] = useState('')
-  const [sensorType, setSensorType] = useState('')
-  const [sensorStatus, setSensorStatus] = useState('')
-  const [sensorInstallationDate, setSensorInstallationDate] = useState(null)
+  const [sensor_mac, setSensor_mac] = useState('');
+  const [sensor_type, setSensor_type] = useState('');
+  const [sensor_use, setSensor_use] = useState('');
+  const [sensor_install, setSensor_install] = useState(null);
 
-  const handleSensorNumberChange = (event) => {
-    setSensorNumber(event.target.value)
-  }
+  const handleSensorMacChange = (event) => {
+    setSensor_mac(event.target.value);
+  };
 
   const handleSensorTypeChange = (event) => {
-    setSensorType(event.target.value)
-  }
+    setSensor_type(event.target.value);
+  };
 
-  const handleSensorStatusChange = (event) => {
-    setSensorStatus(event.target.value)
-  }
+  const handleSensorUseChange = (event) => {
+    setSensor_use(event.target.value);
+  };
 
-  const handleSensorInstallationDateChange = (date) => {
-    setSensorInstallationDate(date)
-  }
+  const handleSensorInstallChange = (date) => {
+    setSensor_install(date);
+  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // 여기에서 폼을 제출하는 로직을 추가할 수 있습니다.
-    console.log('등록하기 버튼이 클릭되었습니다.')
-    console.log('센서 번호:', sensorNumber)
-    console.log('센서 종류:', sensorType)
-    console.log('센서 상태:', sensorStatus)
-    console.log('센서 설치 일시:', sensorInstallationDate)
-  }
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const fetchData = async () => {
+      try {
+        await axios.post('/api/data_sensor', {
+          sensor_mac: sensor_mac,
+          sensor_type: sensor_type,
+          sensor_install: sensor_install,
+          sensor_use: sensor_use,
+        });
+        console.log("성공");
+        // 성공적으로 데이터가 추가되었음을 알리는 알림 등을 표시할 수 있습니다.
+      } catch (error) {
+        console.log("문제발생!");
+        console.log(sensor_mac);
+        console.error(error);
+        // 오류가 발생했을 때 사용자에게 알리는 메시지를 표시할 수 있습니다.
+      }
+    };
+    fetchData();
+  };
+  
+  
   return (
     <Card>
       <CardHeader title='센서 등록하기' titleTypographyProps={{ variant: 'h6' }} />
@@ -71,8 +84,8 @@ const FormLayoutsSeparator = () => {
                 fullWidth
                 label='센서 장치 번호'
                 placeholder='carterLeonard'
-                value={sensorNumber}
-                onChange={handleSensorNumberChange}
+                value={sensor_mac}
+                onChange={handleSensorMacChange}
               />
             </Grid>
 
@@ -81,7 +94,7 @@ const FormLayoutsSeparator = () => {
                 <InputLabel id='sensor-type-label'>센서 종류</InputLabel>
                 <Select
                   label='Type'
-                  value={sensorType}
+                  value={sensor_type}
                   onChange={handleSensorTypeChange}
                   labelId='sensor-type-label'
                 >
@@ -96,26 +109,26 @@ const FormLayoutsSeparator = () => {
                 <InputLabel id='sensor-status-label'>센서 사용 여부</InputLabel>
                 <Select
                   label='Status'
-                  value={sensorStatus}
-                  onChange={handleSensorStatusChange}
+                  value={sensor_use}
+                  onChange={handleSensorUseChange}
                   labelId='sensor-status-label'
                 >
-                  <MenuItem value='사용'>사용</MenuItem>
-                  <MenuItem value='사용 안함'>사용 안함</MenuItem>
-                  <MenuItem value='미설치'>미설치</MenuItem>
+                  <MenuItem value='1'>사용</MenuItem>
+                  <MenuItem value='2'>사용 안함</MenuItem>
+                  <MenuItem value='3'>미설치</MenuItem>
                 </Select>
               </FormControl>
             </Grid>
 
             <Grid item xs={12} sm={6}>
               <DatePicker
-                selected={sensorInstallationDate}
+                selected={sensor_install}
                 showYearDropdown
                 showMonthDropdown
                 placeholderText='MM-DD-YYYY'
                 customInput={<CustomInput />}
                 id='sensor-installation-date'
-                onChange={handleSensorInstallationDateChange}
+                onChange={handleSensorInstallChange}
               />
             </Grid>
           </Grid>
@@ -131,7 +144,7 @@ const FormLayoutsSeparator = () => {
         </CardActions>
       </form>
     </Card>
-  )
-}
+  );
+};
 
-export default FormLayoutsSeparator
+export default FormLayoutsSeparator;
