@@ -176,24 +176,3 @@ const TabAccount = () => {
 }
 
 export default TabAccount
-
-
-{/* <Box>
-<ButtonStyled component='label' variant='contained' htmlFor='account-settings-upload-image'>
-  Upload New Photo
-  <input
-    hidden
-    type='file'
-    onChange={onChange}
-    accept='image/png, image/jpeg'
-    id='account-settings-upload-image'
-  />
-</ButtonStyled>
-<ResetButtonStyled color='error' variant='outlined' onClick={() => setImgSrc('/images/misc/free-icon-building-6017722.png')}>
-  Reset
-</ResetButtonStyled>
-<Typography variant='body2' sx={{ marginTop: 5 }}>
-  Allowed PNG or JPEG. Max size of 800K.
-</Typography>
-</Box> 
-*/}
