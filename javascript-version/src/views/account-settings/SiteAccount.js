@@ -29,6 +29,13 @@ const ImgStyled = styled('img')(({ theme }) => ({
   borderRadius: theme.shape.borderRadius
 }))
 
+const ImgStyledMap = styled('img')(({ theme }) => ({
+  width: 1000,
+  height: 600,
+  marginRight: theme.spacing(6.25),
+  borderRadius: theme.shape.borderRadius
+}))
+
 const ButtonStyled = styled(Button)(({ theme }) => ({
   [theme.breakpoints.down('sm')]: {
     width: '100%',
@@ -50,14 +57,37 @@ const TabAccount = () => {
   // ** State
   const [openAlert, setOpenAlert] = useState(true)
   const [imgSrc, setImgSrc] = useState('/images/misc/free-icon-building-6017722.png')
-  const onChange = file => {
-    const reader = new FileReader()
-    const { files } = file.target
+  const [site_img, setImgMap] = useState('/images/misc/ImgMap.jpg')
+  const onChange = async (file) => {
+    const reader = new FileReader();
+    const { files } = file.target;
+  
     if (files && files.length !== 0) {
-      reader.onload = () => setImgSrc(reader.result)
-      reader.readAsDataURL(files[0])
+      reader.onload = async () => {
+        setImgMap(reader.result);
+  
+        const formData = new FormData();
+        formData.append('file', files[0]);
+  
+        try {
+          const response = await axios.post('/api/site', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          });
+  
+          if (response.status === 200) {
+            console.log('Image uploaded successfully:', response.data);
+            // Update the database with the image URL or any other necessary action
+          }
+        } catch (error) {
+          console.error('Error uploading image:', error);
+        }
+      };
+      reader.readAsDataURL(files[0]);
     }
-  }
+  };
+  
 
   const [site_t, setSiteT] = useState([]);
 
@@ -76,6 +106,17 @@ const TabAccount = () => {
       } catch (error) {
         console.error('Error fetching data:', error);
       }
+
+      // try {
+      //   const response = await axios.post('/api/site', {
+      //     site_img: site_img,
+      //   });
+      //   console.log('데이터가 성공적으로 전송되었습니다.');
+      //   // 성공적으로 데이터를 전송한 후에 수행할 로직 추가
+      // } catch (error) {
+      //   console.error('데이터 전송 중 오류가 발생했습니다:', error);
+      //   // 데이터 전송 중 오류가 발생했을 때의 처리 로직 추가
+      // }
     };
     fetchData();
   }, []);
@@ -102,6 +143,32 @@ const TabAccount = () => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField fullWidth label='종료일' placeholder={site_t[0]?.site_end} defaultValue={site_t[0]?.site_end} />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Box>
+              <ButtonStyled component='label' variant='contained' htmlFor='account-settings-upload-image'>
+                설계도 등록
+                <input
+                  hidden
+                  type='file'
+                  onChange={onChange}
+                  accept='image/png, image/jpeg'
+                  id='account-settings-upload-image'
+                />
+              </ButtonStyled>
+              <ResetButtonStyled color='error' variant='outlined' onClick={() => setImgMap(reader.result)}>
+                Reset
+              </ResetButtonStyled>
+              <Typography variant='body2' sx={{ marginTop: 3 }}>
+                Allowed PNG or JPEG. Max size of 800K.
+              </Typography>
+            </Box> 
+          </Grid>
+          <Grid item xs={12}>
+        {/* 이미지 출력 */}
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <ImgStyledMap src={site_img} alt='Profile Pic' />
+            </Box>
           </Grid>
         </Grid>
     </CardContent>

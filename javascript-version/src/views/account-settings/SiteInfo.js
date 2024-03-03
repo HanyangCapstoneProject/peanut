@@ -164,7 +164,7 @@ const TabInfo = () => {
               </RadioGroup>
             </FormControl>
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid>
             <Box>
               <ButtonStyled component='label' variant='contained' htmlFor='account-settings-upload-image'>
                 Upload New Photo
