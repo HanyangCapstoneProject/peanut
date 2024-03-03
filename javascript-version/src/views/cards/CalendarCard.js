@@ -90,6 +90,7 @@ const CalendarCard = () => {
           <Calendar 
             localizer={localizer} 
             events={schedule} 
+            title="schedule_title"
             startAccessor="start_date" 
             endAccessor="end_date" 
             // eventPropGetter={(myEventsList) => {

@@ -12,11 +12,11 @@ export default async function handler(req, res) {
       res.status(200).json({ schedule });
     } else if (req.method === 'POST') {
       // POST 요청: 클라이언트로부터 받은 센서 정보를 데이터베이스에 추가
-      const { schedule_id, schedule_title, start_date, end_date, memo } = req.body;
+      const { schedule_id, title, start_date, end_date, memo } = req.body;
       await axios.post('http://localhost:8089/api/scheduler',
       {
         schedule_id: schedule_id, 
-        schedule_title: schedule_title, 
+        title: title, 
         "start": new Date(start_date), 
         "end": new Date(end_date), 
         memo: memo,
