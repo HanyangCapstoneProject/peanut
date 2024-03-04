@@ -1,5 +1,8 @@
+//src\views\account-settings\SiteAccount.js
+
 // ** React Imports
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 // ** MUI Imports
 import Box from '@mui/material/Box'
@@ -28,6 +31,13 @@ const ImgStyled = styled('img')(({ theme }) => ({
   borderRadius: theme.shape.borderRadius
 }))
 
+const ImgStyledMap = styled('img')(({ theme }) => ({
+  width: 1000,
+  height: 600,
+  marginRight: theme.spacing(6.25),
+  borderRadius: theme.shape.borderRadius
+}))
+
 const ButtonStyled = styled(Button)(({ theme }) => ({
   [theme.breakpoints.down('sm')]: {
     width: '100%',
@@ -48,115 +58,60 @@ const ResetButtonStyled = styled(Button)(({ theme }) => ({
 const TabAccount = () => {
   // ** State
   const [openAlert, setOpenAlert] = useState(true)
-  const [imgSrc, setImgSrc] = useState('/images/avatars/1.png')
+  const [imgSrc, setImgSrc] = useState('/images/misc/free-icon-building-6017722.png')
+  const [site_img, setSiteImg] = useState('/images/misc/architecture-3050682_1920.jpg')
+  const [site_t, setSiteT] = useState([]);
 
-  const onChange = file => {
-    const reader = new FileReader()
-    const { files } = file.target
-    if (files && files.length !== 0) {
-      reader.onload = () => setImgSrc(reader.result)
-      reader.readAsDataURL(files[0])
-    }
-  }
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/api/site');
+        if (response.status === 200) {
+          const jsonData = response.data;
+          setSiteT(Array.isArray(jsonData.site_t) ? jsonData.site_t : [jsonData.site_t]);
+          console.log(jsonData.site_t);
+          console.log(site_t[0]?.site_code);
+        } else {
+          console.error('Failed to fetch data');
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <CardContent>
-      <form>
         <Grid container spacing={7}>
           <Grid item xs={12} sx={{ marginTop: 4.8, marginBottom: 3 }}>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <ImgStyled src={imgSrc} alt='Profile Pic' />
-              <Box>
-                <ButtonStyled component='label' variant='contained' htmlFor='account-settings-upload-image'>
-                  Upload New Photo
-                  <input
-                    hidden
-                    type='file'
-                    onChange={onChange}
-                    accept='image/png, image/jpeg'
-                    id='account-settings-upload-image'
-                  />
-                </ButtonStyled>
-                <ResetButtonStyled color='error' variant='outlined' onClick={() => setImgSrc('/images/avatars/1.png')}>
-                  Reset
-                </ResetButtonStyled>
-                <Typography variant='body2' sx={{ marginTop: 5 }}>
-                  Allowed PNG or JPEG. Max size of 800K.
-                </Typography>
-              </Box>
             </Box>
           </Grid>
-
           <Grid item xs={12} sm={6}>
-            <TextField fullWidth label='Username' placeholder='johnDoe' defaultValue='johnDoe' />
+            <TextField fullWidth label='현장코드' placeholder = {site_t[0]?.site_code} defaultValue={site_t[0]?.site_code} />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField fullWidth label='Name' placeholder='John Doe' defaultValue='John Doe' />
+            <TextField fullWidth label='현장이름' placeholder={site_t[0]?.site_name} defaultValue={site_t[0]?.site_name} />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              type='email'
-              label='Email'
-              placeholder='johnDoe@example.com'
-              defaultValue='johnDoe@example.com'
-            />
+            <TextField fullWidth label='건설사' placeholder={site_t[0]?.site_company} defaultValue={site_t[0]?.site_company} />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <FormControl fullWidth>
-              <InputLabel>Role</InputLabel>
-              <Select label='Role' defaultValue='admin'>
-                <MenuItem value='admin'>Admin</MenuItem>
-                <MenuItem value='author'>Author</MenuItem>
-                <MenuItem value='editor'>Editor</MenuItem>
-                <MenuItem value='maintainer'>Maintainer</MenuItem>
-                <MenuItem value='subscriber'>Subscriber</MenuItem>
-              </Select>
-            </FormControl>
+            <TextField fullWidth label='시작일' placeholder={site_t[0]?.site_start} defaultValue={site_t[0]?.site_start} />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <FormControl fullWidth>
-              <InputLabel>Status</InputLabel>
-              <Select label='Status' defaultValue='active'>
-                <MenuItem value='active'>Active</MenuItem>
-                <MenuItem value='inactive'>Inactive</MenuItem>
-                <MenuItem value='pending'>Pending</MenuItem>
-              </Select>
-            </FormControl>
+            <TextField fullWidth label='종료일' placeholder={site_t[0]?.site_end} defaultValue={site_t[0]?.site_end} />
           </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField fullWidth label='Company' placeholder='ABC Pvt. Ltd.' defaultValue='ABC Pvt. Ltd.' />
-          </Grid>
-
-          {openAlert ? (
-            <Grid item xs={12} sx={{ mb: 3 }}>
-              <Alert
-                severity='warning'
-                sx={{ '& a': { fontWeight: 400 } }}
-                action={
-                  <IconButton size='small' color='inherit' aria-label='close' onClick={() => setOpenAlert(false)}>
-                    <Close fontSize='inherit' />
-                  </IconButton>
-                }
-              >
-                <AlertTitle>Your email is not confirmed. Please check your inbox.</AlertTitle>
-                <Link href='/' onClick={e => e.preventDefault()}>
-                  Resend Confirmation
-                </Link>
-              </Alert>
-            </Grid>
-          ) : null}
-
           <Grid item xs={12}>
-            <Button variant='contained' sx={{ marginRight: 3.5 }}>
-              Save Changes
-            </Button>
-            <Button type='reset' variant='outlined' color='secondary'>
-              Reset
-            </Button>
+        {/* 이미지 출력 */}
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <ImgStyledMap src={site_img} alt='Profile Pic' />
+            </Box>
           </Grid>
         </Grid>
-      </form>
     </CardContent>
   )
 }
