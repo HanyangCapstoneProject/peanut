@@ -71,7 +71,8 @@
     "react-popper": "^2.2.5",
     "saas": "^1.0.0",
     "sass": "^1.70.0",
-    "sass-loader": "^14.1.0"
+    "sass-loader": "^14.1.0",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "css-loader": "^6.10.0",
