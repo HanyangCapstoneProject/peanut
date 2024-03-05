@@ -100,10 +100,10 @@ const FormLayoutsIcons = () => {
       try {
         await axios.post('/api/schedule', {
           title: title,
-          location: location,
+          // location: location,
           startDate: startDate,
           endDate: endDate,
-          color: color,
+          // color: color,
           memo: memo,
         });
         console.log("성공");
