@@ -22,33 +22,34 @@ import axios from 'axios';
 // env
 //REACT_APP_API_KEY = "3928ebf09d1e4495380386b521a3a0f1"
 // 불러오기
-const API_KEY = process.env.REACT_APP_API_KEY;
+
+const API_KEY = "3928ebf09d1e4495380386b521a3a0f1";
 
 const Weather = () => {
   const [weather, setWeather] = useState({});
   const [cityName, setCityName] = useState('');
 
-  const salesData = [
+  const weatherData = [
     {
-      stats: `${weather.temp}°C`,
+      stats: weather.temp ? `${weather.temp}°C` : '0',
       title: '기온',
       color: 'primary',
       icon: <TemperatureCelsius sx={{ fontSize: '1.75rem' }} />,
     },
     {
-      stats: `${weather.humidity}%`,
+      stats: weather.humidity ? `${weather.humidity}%` : '0',
       title: '습도',
       color: 'success',
       icon: <WeatherRainy sx={{ fontSize: '1.75rem' }} />,
     },
     {
-      stats: `${weather.windSpeed}`,
+      stats: weather.windSpeed ? `${weather.windSpeed}` : '0',
       color: 'warning',
       title: '바람',
       icon: <WeatherWindy sx={{ fontSize: '1.75rem' }} />,
     },
     {
-      stats: `${weather.clouds}%`,
+      stats: weather.clouds ? `${weather.clouds}%` : '0',
       color: 'info',
       title: '구름',
       icon: <WeatherCloudy sx={{ fontSize: '1.75rem' }} />,
@@ -56,28 +57,28 @@ const Weather = () => {
   ];
 
   const getWeather = async (lat, lon) => {
+    
+
     try {
       const res = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
       );
 
-      const weatherId = res.data.weather[0].id;
-      const weatherIcon = res.data.weather[0].icon;
-      const weatherIconAdrs = `http://openweathermap.org/img/wn/${weatherIcon}@2x.png`;
-      const temp = Math.round(res.data.main.temp);
+      const weatherData = {
+        temp: res.data.main.temp,
+        humidity: res.data.main.humidity,
+        windSpeed: res.data.wind.speed,
+        clouds: res.data.clouds.all,
+        weatherMain: res.data.weather[0].main,
+        cityName: res.data.name
+      };
 
-      const weatherKo = res.data.weather[0].main; // or whatever you want to assign to weatherKo
-      const cityName = res.data.name;
-
-      setWeather({
-        description: weatherKo,
-        name: cityName,
-        temp: temp,
-        icon: weatherIconAdrs,
-      });
+      setWeather(weatherData);
     } catch (err) {
       console.error(err);
     }
+
+
   };
 
   useEffect(() => {
@@ -89,7 +90,7 @@ const Weather = () => {
   }, []);
 
   const renderStats = () => {
-    return salesData.map((item, index) => (
+    return weatherData.map((item, index) => (
       <Grid item xs={12} sm={3} key={index}>
         <Box key={index} sx={{ display: 'flex', alignItems: 'center' }}>
           <Avatar
