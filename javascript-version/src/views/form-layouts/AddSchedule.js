@@ -15,6 +15,9 @@ import Select from '@mui/material/Select'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 
+import FormControl from '@mui/material/FormControl'
+import CardActions from '@mui/material/CardActions'
+
 // ** Icons Imports
 import Calendar from 'mdi-material-ui/Calendar'
 import Tag from 'mdi-material-ui/Tag'
@@ -63,7 +66,8 @@ const CustomInputEnd = forwardRef((props, ref) => {
 const FormLayoutsIcons = () => {
 
   const [title, setTitle] = useState('');
-  const [location, setLocation] = useState('');
+  const [level, setLevel] = useState('');
+  const [area, setArea] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [color, setColor] = useState('');
@@ -74,8 +78,12 @@ const FormLayoutsIcons = () => {
     setTitle(event.target.value);
   };
 
-  const handleLocationChange = (event) => {
-    setLocation(event.target.value);
+  const handleLevelChange = (event) => {
+    setLevel(event.target.value);
+  };
+
+  const handleAreaChange = (event) => {
+    setArea(event.target.value);
   };
 
   const handleStartDateChange = (date) => {
@@ -130,8 +138,8 @@ const FormLayoutsIcons = () => {
       <CardHeader title='일정 추가/수정하기' titleTypographyProps={{ variant: 'h6' }} />
       <Divider sx={{ margin: 0 }} />
 
-      <CardContent>
-        <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
+        <CardContent>
           <Grid container spacing={5}>
             <Grid item xs={12}>
               <TextField
@@ -149,26 +157,7 @@ const FormLayoutsIcons = () => {
                 }}
               />
             </Grid>
-            <Grid item xs={12}>
-              <Select
-                fullWidth
-                label='현장 위치'
-                placeholder='선택하세요.'
-                value={location}
-                onChange={handleLocationChange}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position='start'>
-                      <MapMarker />
-                    </InputAdornment>
-                  )
-                }}
-              >
-                <MenuItem value='1'>사용</MenuItem>
-                <MenuItem value='2'>사용 안함</MenuItem>
-                <MenuItem value='3'>미설치</MenuItem>
-              </Select>
-            </Grid>
+            
             <Grid item xs={12} sm={6}>
               <DatePicker
                 selected={startDate}
@@ -191,32 +180,55 @@ const FormLayoutsIcons = () => {
                 onChange={handleEndDateChange}
               />
             </Grid>
+            
+
+            <Grid item xs={12} sm={6}>
+            <FormControl fullWidth>
+                <InputLabel id='level-label'>층수</InputLabel>
+                <Select
+                  label='Status'
+                  value={level}
+                  onChange={handleLevelChange}
+                  labelId='level-label'
+                >
+                  <MenuItem value='1'>1층</MenuItem>
+                  <MenuItem value='2'>2층</MenuItem>
+                  <MenuItem value='3'>3층</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+            <FormControl fullWidth>
+                <InputLabel 
+                id='area-label'>구역</InputLabel>
+                <Select
+                  label='Status'
+                  value={area}
+                  onChange={handleAreaChange}
+                  labelId='area-label'
+                >
+                  <MenuItem value='1'>구역A</MenuItem>
+                  <MenuItem value='2'>구역B</MenuItem>
+                  <MenuItem value='3'>구역C</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+
             <Grid item xs={12}>
-              <InputLabel id="demo-controlled-open-select-label">일정 색깔</InputLabel>
-              <Select
-                labelId="demo-controlled-open-select-label"
-                id="demo-controlled-open-select"
-                open={open}
-                onClose={handleClose}
-                onOpen={handleOpen}
-                value={color}
-                label="일정 색깔"
-                onChange={handleColorChange}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position='start'>
-                      <Palette />
-                    </InputAdornment>
-                  )
-                }}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+            <FormControl fullWidth>
+                <InputLabel 
+                id='color-label'>색깔</InputLabel>
+                <Select
+                  label='Status'
+                  value={color}
+                  onChange={handleColorChange}
+                  labelId='color-label'
+                >
+                <MenuItem value='1'>파란색</MenuItem>
+                <MenuItem value='2'>보라색</MenuItem>
+                <MenuItem value='3'>빨간색</MenuItem>
               </Select>
+              </FormControl>
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -228,25 +240,22 @@ const FormLayoutsIcons = () => {
                 value={memo}
                 onChange={handleMemoChange}
                 sx={{ '& .MuiOutlinedInput-root': { alignItems: 'baseline' } }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position='start'>
-                      <MessageOutline />
-                    </InputAdornment>
-                  )
-                }}
               />
-            </Grid>
-            <Grid item xs={12}>
-              <Button type='submit' variant='contained' size='large'>
-                추가/수정하기
-              </Button>
-            </Grid>
-          </Grid>
-        </form>
-      </CardContent>
+            </Grid> 
+           </Grid>
+          </CardContent>
+          
+          <CardActions>
+            <Button size='large' type='submit' sx={{ mr: 2 }} variant='contained'>
+              추가/수정하기
+            </Button>
+            <Button size='large' color='secondary' variant='outlined'>
+              취소
+            </Button>
+          </CardActions>
+        </form>  
     </Card>
-  )
-}
+  );
+};
 
 export default FormLayoutsIcons
