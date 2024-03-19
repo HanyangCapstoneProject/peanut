@@ -21,34 +21,8 @@ import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 const localizer = momentLocalizer(moment);
 
-const data = [
-  {
-    'title': 'All Day Event very long title',
-    'allDay': true,
-    'start': new Date(2015, 3, 0),
-    'end': new Date(2015, 3, 1)
-  },
-  {
-    'title': 'Long Event',
-    'start': new Date(2015, 3, 7),
-    'end': new Date(2015, 3, 10)
-  },
-
-  {
-    'title': 'DTS STARTS',
-    'start': new Date(2024, 2, 13, 0, 0, 0),
-    'end': new Date(2024, 2, 20, 0, 0, 0)
-  }
-]
-
 const CalendarCard = () => {
   const [schedule, setSchedule] = useState([]);
-
-  const scheduleStatusObj = {
-    1: { color: 'success' },
-    2: { color: 'error' },
-    3: { color: 'warning' }
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -93,19 +67,9 @@ const CalendarCard = () => {
             title="schedule_title"
             startAccessor="start_date" 
             endAccessor="end_date" 
-            // eventPropGetter={(myEventsList) => {
-            //   const backgroundColor = myEventsList.colorEvento ? myEventsList.colorEvento : 'primary';
-            //   const color = myEventsList.color ? myEventsList.color : 'primary';
-            //   return { style: { backgroundColor ,color} }
-            // }}
+            // eventPropGetter= "color"
           />
         </div>
-        <Box sx={{ mb: 7, display: 'flex', alignItems: 'center' }}>
-          <Typography variant='h5' sx={{ mr: 4 }}>
-            45%
-          </Typography>
-          <Typography variant='body2'>Your sales performance is 45% 😎 better compared to last month</Typography>
-        </Box>
       </CardContent>
     </Card>
   )
