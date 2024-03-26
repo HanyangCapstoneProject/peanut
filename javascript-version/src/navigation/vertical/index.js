@@ -17,12 +17,7 @@ const navigation = () => {
       sectionTitle: '콘크리트 양생'
     },
     {
-      title: '목표 온도 분석',
-      icon: ChartBar,
-      path: '/analysis'
-    },
-    {
-      title: '양생 완료일 예측',
+      title: '콘크리트 정보',
       icon: ClockOutline,
       path: '/predict'
     },
