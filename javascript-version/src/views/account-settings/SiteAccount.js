@@ -90,7 +90,77 @@ const TabAccount = () => {
               <ImgStyled src={imgSrc} alt='Profile Pic' />
             </Box>
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Box
+            height={60}
+            width={600}
+            mx={8}
+            my={3}
+            display="flex"
+            alignItems="center"
+            gap={4}
+            p={3}
+            sx={{ border: '0.5px solid grey', borderRadius: '6px' }}
+          >
+              현장코드 {site_t[0]?.site_code}
+          </Box>
+
+          <Box
+            height={60}
+            width={600}
+            mx={8}
+            my={3}
+            display="flex"
+            alignItems="center"
+            gap={4}
+            p={3}
+            sx={{ border: '0.5px solid grey', borderRadius: '6px' }}
+          >
+              현장이름 {site_t[1]?.site_code}
+          </Box>
+
+          <Box
+            height={60}
+            width={600}
+            mx={8}
+            my={3}
+            display="flex"
+            alignItems="center"
+            gap={4}
+            p={3}
+            sx={{ border: '0.5px solid grey', borderRadius: '6px' }}
+          >
+              건설사 {site_t[2]?.site_code}
+          </Box>
+
+          <Box
+            height={60}
+            width={600}
+            mx={8}
+            my={3}
+            display="flex"
+            alignItems="center"
+            gap={4}
+            p={3}
+            sx={{ border: '0.5px solid grey', borderRadius: '6px' }}
+          >
+              시작일 {site_t[3]?.site_code}
+          </Box>
+
+          <Box
+            height={60}
+            width={600}
+            mx={8}
+            my={3}
+            display="flex"
+            alignItems="center"
+            gap={4}
+            p={3}
+            sx={{ border: '0.5px solid grey', borderRadius: '6px' }}
+          >
+              종료일 {site_t[4]?.site_code}
+          </Box>
+
+          {/* <Grid item xs={12} sm={6}>
             <TextField fullWidth label='현장코드' placeholder = {site_t[0]?.site_code} defaultValue={site_t[0]?.site_code} />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -104,7 +174,7 @@ const TabAccount = () => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField fullWidth label='종료일' placeholder={site_t[0]?.site_end} defaultValue={site_t[0]?.site_end} />
-          </Grid>
+          </Grid> */}
           <Grid item xs={12}>
         {/* 이미지 출력 */}
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
