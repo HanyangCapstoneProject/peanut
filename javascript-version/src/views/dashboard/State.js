@@ -1,10 +1,11 @@
+import { useRouter } from 'next/router'
+
 // ** MUI Imports
 import Card from '@mui/material/Card'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 import { styled, useTheme } from '@mui/material/styles'
-import { useRouter } from 'next/router'
 
 // 배경 삼각형 이미지
 const TriangleImg = styled('img')({
@@ -15,7 +16,7 @@ const TriangleImg = styled('img')({
 })
 
 // 빌딩 이미지
-const TrophyImg = styled('img')({
+const BuildingImg = styled('img')({
   right: 36,
   bottom: 20,
   height: 98,
@@ -51,7 +52,7 @@ const State = () => {
           현장정보
         </Button>
         <TriangleImg alt='triangle background' src={`/images/misc/${imageSrc}`} />
-        <TrophyImg alt='trophy' src='\images\misc\free-icon-building-6017722.png' />
+        <BuildingImg alt='building' src='\images\misc\free-icon-building-6017722.png' />
       </CardContent>
     </Card>
   )

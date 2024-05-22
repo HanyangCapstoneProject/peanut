@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router'
+
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
@@ -7,7 +9,7 @@ import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 import MuiDivider from '@mui/material/Divider'
 
-const depositData = [
+export const errorNotiData = [
   {
     logoWidth: 28,
     logoHeight: 29,
@@ -50,7 +52,7 @@ const depositData = [
   },
 ]
 
-const withdrawData = [
+export const changeNotiData = [
   {
     logoWidth: 28,
     logoHeight: 29,
@@ -105,26 +107,31 @@ const Divider = styled(MuiDivider)(({ theme }) => ({
 }))
 
 
+const NotiBrief = () => {
+  const router = useRouter();
 
-const CalendarBrief = () => {
+  const handlePage = () => {
+    router.push(`/notification`);
+  };
+
   return (
     <Card sx={{ display: 'flex', justifyContent: 'space-between', flexDirection: ['column', 'column', 'row'] }}>
       <Box sx={{ width: '100%' }}>
         <CardHeader
           title='알림내역'
           sx={{ pt: 5.5, alignItems: 'center', '& .MuiCardHeader-action': { mt: 0.6 } }}
-          action={<Typography variant='caption'>View All</Typography>}
+          action={<Typography variant='caption'>전체 알림 보기</Typography>}
           titleTypographyProps={{
             variant: 'h6',
             sx: { lineHeight: '1.6 !important', letterSpacing: '0.15px !important' }
           }}
         />
         <CardContent sx={{ pb: theme => `${theme.spacing(5.5)} !important` }}>
-          {depositData.map((item, index) => {
+          {errorNotiData.map((item, index) => {
             return (
               <Box
                 key={item.title}
-                sx={{ display: 'flex', alignItems: 'center', mb: index !== depositData.length - 1 ? 6 : 0 }}
+                sx={{ display: 'flex', alignItems: 'center', mb: index !== errorNotiData.length - 1 ? 6 : 0 }}
               >
                 <Box sx={{ minWidth: 38, display: 'flex', justifyContent: 'center' }}>
                   <img src={item.logo} alt={item.title} width={item.logoWidth} height={item.logoHeight} />
@@ -166,11 +173,11 @@ const CalendarBrief = () => {
           }}
         />
         <CardContent sx={{ pb: theme => `${theme.spacing(5.5)} !important` }}>
-          {withdrawData.map((item, index) => {
+          {changeNotiData.map((item, index) => {
             return (
               <Box
                 key={item.title}
-                sx={{ display: 'flex', alignItems: 'center', mb: index !== depositData.length - 1 ? 6 : 0 }}
+                sx={{ display: 'flex', alignItems: 'center', mb: index !== changeNotiData.length - 1 ? 6 : 0 }}
               >
                 <Box sx={{ minWidth: 36, display: 'flex', justifyContent: 'center' }}>
                   <img src={item.logo} alt={item.title} width={item.logoWidth} height={item.logoHeight} />
@@ -203,4 +210,4 @@ const CalendarBrief = () => {
 }
 
 
-export default CalendarBrief
+export default NotiBrief

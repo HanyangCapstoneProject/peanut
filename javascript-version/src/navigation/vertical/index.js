@@ -1,5 +1,5 @@
 // ** Icon imports
-import { HomeOutline, AccessPoint, ClockOutline, Calendar, ChartBar, Domain, AccountCogOutline, AlertCircleOutline } from 'mdi-material-ui'
+import { HomeOutline, AccessPoint, ClockOutline, Calendar, Monitor, Domain, AccountCogOutline, AlertCircleOutline } from 'mdi-material-ui'
 
 const navigation = () => {
   return [
@@ -22,6 +22,11 @@ const navigation = () => {
       path: '/predict'
     },
     {
+      title: '센서 모니터링',
+      icon: Monitor,
+      path: '/mornitoring'
+    },
+    {
       title: '전체 일정표',
       icon: Calendar,
       path: '/calendar'
@@ -40,7 +45,7 @@ const navigation = () => {
       path: '/users'
     },
     {
-      sectionTitle: '앱에서만 구동될 서비스'
+      sectionTitle: '기타 페이지 테스트'
     },
     {
       title: '로그인',
@@ -51,6 +56,11 @@ const navigation = () => {
       title: '센싱',
       icon: AlertCircleOutline,
       path: '/sensing'
+    },
+    {
+      title: '센싱2',
+      icon: AlertCircleOutline,
+      path: '/sensing2'
     },
   ]
 }

@@ -114,7 +114,7 @@ const AnalysisCard = () => {
           variant='contained'
           onClick={() => handlePage()}
         >
-          분석 내용 확인하기
+          센서 모니터링 하기
         </Button>
       </CardContent>
     </Card>
