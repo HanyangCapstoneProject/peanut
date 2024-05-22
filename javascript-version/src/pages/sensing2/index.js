@@ -1,9 +1,20 @@
-// in your index.ios.js or index.android.js
-import React, { Component } from "react";
-import { AppRegistry } from "react-native";
-import App from "react-native-ble-manager/example/App"; //<-- simply point to the example js!
-/* 
-Note: The react-native-ble-manager/example directory is only included when cloning the repo, the above import will not work 
-if trying to import react-native-ble-manager/example from node_modules
-*/
-AppRegistry.registerComponent("MyAwesomeApp", () => App);
+// pages/index.js
+import Head from 'next/head';
+import BleScanner from '../../components/BleScanner';
+
+export default function Home() {
+  return (
+    <div>
+      <Head>
+        <title>BLE Scanner</title>
+        <meta name="description" content="BLE Scanner using Web Bluetooth API" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <main>
+        <h1>Welcome to BLE Scanner</h1>
+        <BleScanner />
+      </main>
+    </div>
+  );
+}
