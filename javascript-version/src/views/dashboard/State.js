@@ -4,6 +4,7 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 import { styled, useTheme } from '@mui/material/styles'
+import { useRouter } from 'next/router'
 
 // 배경 삼각형 이미지
 const TriangleImg = styled('img')({
@@ -21,7 +22,13 @@ const TrophyImg = styled('img')({
   position: 'absolute'
 })
 
-const Trophy = () => {
+const State = () => {
+  const router = useRouter();
+
+  const handlePage = () => {
+    router.push(`/site-info`);
+  };
+
   // ** Hook
   const theme = useTheme()
   const imageSrc = theme.palette.mode === 'light' ? 'triangle-light.png' : 'triangle-dark.png'
@@ -36,7 +43,11 @@ const Trophy = () => {
         <Typography variant='h5' sx={{ my: 4, color: 'primary.main' }}>
           2024.01.08
         </Typography>
-        <Button size='small' variant='contained'>
+        <Button 
+          size='small' 
+          variant='contained'
+          onClick={() => handlePage()}
+        >
           현장정보
         </Button>
         <TriangleImg alt='triangle background' src={`/images/misc/${imageSrc}`} />
@@ -46,4 +57,4 @@ const Trophy = () => {
   )
 }
 
-export default Trophy
+export default State

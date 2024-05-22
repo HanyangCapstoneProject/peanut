@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router'
+
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
@@ -15,6 +17,12 @@ import DotsVertical from 'mdi-material-ui/DotsVertical'
 import ReactApexcharts from 'src/@core/components/react-apexcharts'
 
 const AnalysisCard = () => {
+  const router = useRouter();
+
+  const handlePage = () => {
+    router.push(`/mornitoring`);
+  };
+
   // ** Hook
   const theme = useTheme()
 
@@ -101,7 +109,11 @@ const AnalysisCard = () => {
           </Typography>
           <Typography variant='body2'>진행중</Typography>
         </Box>
-        <Button fullWidth variant='contained'>
+        <Button 
+          fullWidth 
+          variant='contained'
+          onClick={() => handlePage()}
+        >
           분석 내용 확인하기
         </Button>
       </CardContent>
