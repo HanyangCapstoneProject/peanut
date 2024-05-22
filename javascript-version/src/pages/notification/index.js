@@ -1,4 +1,4 @@
-import NotiBrief from "src/views/dashboard/Notification";
+import NotiBrief from "src/views/dashboard/NotiBrief";
 
 const Notification = () => {
     return (

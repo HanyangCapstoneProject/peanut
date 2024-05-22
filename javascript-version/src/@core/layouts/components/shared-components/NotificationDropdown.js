@@ -2,7 +2,7 @@
 import { useState, Fragment } from 'react'
 import { useRouter } from 'next/router'
 
-import { errorNotiData, changeNotiData } from 'src/views/dashboard/Notification'
+import { errorNotiData, changeNotiData } from 'src/views/dashboard/NotiData'
 
 // ** MUI Imports
 import Box from '@mui/material/Box'
