@@ -8,7 +8,7 @@ import ApexChartWrapper from 'src/@core/styles/libs/react-apexcharts'
 // ** Demo Components Imports
 import State from 'src/views/dashboard/State'
 import Weather from 'src/views/dashboard/Weather'
-import Notification from 'src/views/dashboard/Notification'
+import NotiBrief from 'src/views/dashboard/NotiBrief'
 
 import Analysis from 'src/views/cards/AnalysisCard'
 import Predict from 'src/views/cards/PredictCard'
@@ -30,7 +30,7 @@ const Dashboard = () => {
           <Predict />
         </Grid>
         <Grid item xs={12} md={12}>
-          <Notification />
+          <NotiBrief />
         </Grid>
       </Grid>
     </ApexChartWrapper>

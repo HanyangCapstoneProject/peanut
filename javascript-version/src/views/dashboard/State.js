@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router'
 
 // ** MUI Imports
@@ -24,11 +25,29 @@ const BuildingImg = styled('img')({
 })
 
 const State = () => {
+  // 페이지 라우팅
   const router = useRouter();
 
   const handlePage = () => {
     router.push(`/site-info`);
   };
+
+  // 현재 날짜 출력
+  const [currentDate, setCurrentDate] = useState('');
+
+  useEffect(() => {
+    const updateDate = () => {
+      const today = new Date();
+      const formattedDate = today.toLocaleDateString(); // 날짜만 가져오기
+      setCurrentDate(formattedDate);
+    };
+
+    updateDate(); // 컴포넌트가 마운트될 때 한 번 설정
+
+    const interval = setInterval(updateDate, 1000 * 60 * 60 * 24); // 하루에 한 번 업데이트
+
+    return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 정리
+  }, []);
 
   // ** Hook
   const theme = useTheme()
@@ -42,7 +61,7 @@ const State = () => {
           KDS 41 10 00:2014
         </Typography>
         <Typography variant='h5' sx={{ my: 4, color: 'primary.main' }}>
-          2024.01.08
+          {currentDate}
         </Typography>
         <Button 
           size='small' 

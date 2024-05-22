@@ -1,4 +1,4 @@
-import Dashboard from 'src/views/dashboard/DashBoardPage'
+import Dashboard from 'src/views/dashboard/DashboardPage'
 
 const Home = () => {
   return (
