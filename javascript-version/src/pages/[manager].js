@@ -3,7 +3,7 @@ import * as React from "react"
 import io from "socket.io-client"
 
 // 페이지 불러오기
-import DashboardPage from "src/views/dashboard/DashBoardPage"
+import DashboardPage from "src/views/dashboard/DashboardPage"
 import LoginPage from "src/views/auth/LoginPage"
 
 let socket;

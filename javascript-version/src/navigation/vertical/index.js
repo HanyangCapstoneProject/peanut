@@ -1,8 +1,8 @@
 // ** Icon imports
-import { HomeOutline, AccessPoint, ClockOutline, Calendar, Monitor, Domain, AccountCogOutline, AlertCircleOutline } from 'mdi-material-ui'
+import { HomeOutline, AccessPoint, ClockOutline, Calendar, Monitor, Domain, AccountCogOutline, AlertCircleOutline, Logout } from 'mdi-material-ui'
 
-const navigation = () => {
-  return [
+const navigation = (userRole) => {
+  const navItems = [
     {
       title: '대시보드',
       icon: HomeOutline,
@@ -32,37 +32,30 @@ const navigation = () => {
       path: '/calendar'
     },
     {
-      sectionTitle: '관리자 페이지'
+      sectionTitle: '관리자 페이지',
+      adminOnly: true // 관리자 전용 섹션 표시
     },
     {
       title: '센서 관리',
       icon: AccessPoint,
-      path: '/sensors'
+      path: '/sensors',
+      adminOnly: true // 관리자 전용 항목 표시
     },
     {
       title: '사용자 관리',
       icon: AccountCogOutline,
-      path: '/users'
+      path: '/users',
+      adminOnly: true // 관리자 전용 항목 표시
     },
     {
-      sectionTitle: '기타 페이지 테스트'
-    },
-    {
-      title: '로그인',
-      icon: AlertCircleOutline,
+      title: '로그아웃',
+      icon: Logout,
       path: '/auth'
     },
-    {
-      title: '센싱',
-      icon: AlertCircleOutline,
-      path: '/sensing'
-    },
-    {
-      title: '센싱2',
-      icon: AlertCircleOutline,
-      path: '/sensing2'
-    },
-  ]
+  ];
+
+  // 사용자 역할이 'manager'가 아닐 경우 관리자 전용 항목을 필터링
+  return navItems.filter(item => !item.adminOnly || (item.adminOnly && userRole === 'manager'));
 }
 
-export default navigation
+export default navigation;

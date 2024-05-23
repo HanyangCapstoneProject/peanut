@@ -22,7 +22,6 @@ const BleScanner = () => {
 
   return (
     <div>
-      <h1>BLE Scanner</h1>
       <button onClick={scanForDevices}>센서를 스캔합니다.</button>
       {devices.length > 0 && (
         <ul>

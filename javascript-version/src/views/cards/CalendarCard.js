@@ -45,20 +45,7 @@ const CalendarCard = () => {
 
   return (
     <Card>
-      <CardHeader
-        title='전체 일정'
-        titleTypographyProps={{ sx: { lineHeight: '1.6 !important', letterSpacing: '0.15px !important' } }}
-        action={
-          <IconButton 
-            size='small' 
-            aria-label='settings' 
-            className='card-more-options' 
-            sx={{ color: 'text.secondary' }}
-          >
-            <DotsVertical />
-          </IconButton>
-        }
-      />
+      <CardHeader />
       <CardContent sx={{ pt: theme => `${theme.spacing(2.25)} !important` }}>
         <div style={{ height: '800px' }}>
           <Calendar 

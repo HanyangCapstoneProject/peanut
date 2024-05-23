@@ -83,6 +83,7 @@ const TabAccount = () => {
   }, []);
 
   return (
+    
     <CardContent>
         <Grid container spacing={7}>
           <Grid item xs={12} sx={{ marginTop: 4.8, marginBottom: 3 }}>
@@ -90,9 +91,10 @@ const TabAccount = () => {
               <ImgStyled src={imgSrc} alt='Profile Pic' />
             </Box>
           </Grid>
+          
           <Box
             height={60}
-            width={600}
+            width={500}
             mx={8}
             my={3}
             display="flex"
@@ -106,7 +108,7 @@ const TabAccount = () => {
 
           <Box
             height={60}
-            width={600}
+            width={500}
             mx={8}
             my={3}
             display="flex"
@@ -120,7 +122,7 @@ const TabAccount = () => {
 
           <Box
             height={60}
-            width={600}
+            width={500}
             mx={8}
             my={3}
             display="flex"
@@ -134,7 +136,7 @@ const TabAccount = () => {
 
           <Box
             height={60}
-            width={600}
+            width={500}
             mx={8}
             my={3}
             display="flex"
@@ -148,7 +150,7 @@ const TabAccount = () => {
 
           <Box
             height={60}
-            width={600}
+            width={500}
             mx={8}
             my={3}
             display="flex"

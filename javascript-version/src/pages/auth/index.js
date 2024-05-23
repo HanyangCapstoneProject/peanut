@@ -11,10 +11,10 @@ export default function Home(props) {
 
   const handleJoinRoom = (user_, manager_) => {
     if(manager_) {
-      router.push(`/manager?name=${user_}`);
+      router.push(`/manager`);
     }
     else {
-      router.push(`/user?name=${user_}`);
+      router.push(`/user`);
     }
   };
 
