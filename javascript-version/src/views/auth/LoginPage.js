@@ -1,78 +1,50 @@
-// ** React Imports
-import { useState } from 'react'
+// * src/views/form-layouts/LoginForm.js
+import React, { useState } from 'react';
+import { useRouter } from "next/router"
 
-// ** Next Imports
-import Link from 'next/link'
-import { useRouter } from 'next/router'
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import InputLabel from '@mui/material/InputLabel';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import CardContent from '@mui/material/CardContent';
+import FormControl from '@mui/material/FormControl';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import { styled, useTheme } from '@mui/material/styles';
+import MuiCard from '@mui/material/Card';
+import InputAdornment from '@mui/material/InputAdornment';
 
-// ** MUI Components
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import Checkbox from '@mui/material/Checkbox'
-import TextField from '@mui/material/TextField'
-import InputLabel from '@mui/material/InputLabel'
-import Typography from '@mui/material/Typography'
-import IconButton from '@mui/material/IconButton'
-import CardContent from '@mui/material/CardContent'
-import FormControl from '@mui/material/FormControl'
-import OutlinedInput from '@mui/material/OutlinedInput'
-import { styled, useTheme } from '@mui/material/styles'
-import MuiCard from '@mui/material/Card'
-import InputAdornment from '@mui/material/InputAdornment'
-import MuiFormControlLabel from '@mui/material/FormControlLabel'
+import EyeOutline from 'mdi-material-ui/EyeOutline';
+import EyeOffOutline from 'mdi-material-ui/EyeOffOutline';
 
-// ** Icons Imports
-import EyeOutline from 'mdi-material-ui/EyeOutline'
-import EyeOffOutline from 'mdi-material-ui/EyeOffOutline'
+import themeConfig from 'src/configs/themeConfig';
+import BlankLayout from 'src/@core/layouts/BlankLayout';
+import FooterIllustrationsV1 from 'src/views/auth/FooterIllustration';
+import UserList from 'src/components/UserList';
 
-// ** Configs
-import themeConfig from 'src/configs/themeConfig'
-
-// ** Layout Import
-import BlankLayout from 'src/@core/layouts/BlankLayout'
-
-// ** Demo Imports
-import FooterIllustrationsV1 from 'src/views/auth/FooterIllustration'
-
-// ** Styled Components
 const Card = styled(MuiCard)(({ theme }) => ({
   [theme.breakpoints.up('sm')]: { width: '28rem' }
 }))
 
-const LinkStyled = styled('a')(({ theme }) => ({
-  fontSize: '0.875rem',
-  textDecoration: 'none',
-  color: theme.palette.primary.main
-}))
+const LoginPage = () => {
+  const theme = useTheme();
+  const router = useRouter();
 
-const FormControlLabel = styled(MuiFormControlLabel)(({ theme }) => ({
-  '& .MuiFormControlLabel-label': {
-    fontSize: '0.875rem',
-    color: theme.palette.text.secondary
-  }
-}))
+  const [phone, setPhone] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [manager, setManager] = React.useState(""); 
 
-const LoginPage = (props) => {
-  const [user, setUser] = useState("");
-  const [manager, setManager] = useState(false);
+  const userList = UserList();
 
-  // ** State
   const [values, setValues] = useState({
     password: '',
     showPassword: false
   })
 
-  // ** Hook
-  const theme = useTheme()
-  const router = useRouter()
-
   const handleChange = prop => event => {
     setValues({ ...values, [prop]: event.target.value })
   }
-
-  const handleChecked = (event) => {
-    setManager(event.target.checked);
-  };
 
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword })
@@ -81,6 +53,21 @@ const LoginPage = (props) => {
   const handleMouseDownPassword = event => {
     event.preventDefault()
   }
+
+  // 유저 전화번호와 비밀번호를 검사하여 사용자의 권한을 반환하는 함수
+  const handleLogin = (phone, password) => {
+    // 사용자를 찾습니다.
+    const user = userList.find(user => user.users_id === phone && user.users_pw === password);
+    // 사용자가 존재하면 권한을 설정합니다.
+    if (user && user.users_authority) {
+      return 1;
+    }
+    else if (user) {
+      return 2;
+    }
+    // 사용자의 권한을 반환합니다. 사용자가 존재하지 않으면 null을 반환합니다.
+    return 3;
+  };
 
   return (
     <Box className='content-center'>
@@ -171,8 +158,8 @@ const LoginPage = (props) => {
               fullWidth 
               id='phone' 
               label='전화번호' 
-              value={user}
-              onChange={(e) => setUser(e.target.value)}
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
               sx={{ marginBottom: 4 }}
              />
             <FormControl fullWidth>
@@ -181,7 +168,10 @@ const LoginPage = (props) => {
                 label='Password'
                 value={values.password}
                 id='auth-login-password'
-                onChange={handleChange('password')}
+                onChange={(e) => {
+                  handleChange('password')(e); // handleChange를 호출하여 상태를 업데이트합니다.
+                  setPassword(e.target.value); // setPassword를 사용하여 비밀번호 상태를 업데이트합니다.
+                }}
                 type={values.showPassword ? 'text' : 'password'}
                 endAdornment={
                   <InputAdornment position='end'>
@@ -200,24 +190,21 @@ const LoginPage = (props) => {
             <Box
               sx={{ mb: 4, display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-between' }}
             >
-              <FormControlLabel 
-                control={<Checkbox 
-                    checked={manager}
-                    onChange={handleChecked}
-                  />} 
-                label='관리자 모드로 로그인하기'
-              />
-              <Link passHref href='/'>
-                <LinkStyled onClick={e => e.preventDefault()}>비밀번호 재설정하기</LinkStyled>
-              </Link>
             </Box>
             <Button
               fullWidth
               size='large'
               variant='contained'
               sx={{ marginBottom: 7 }}
-              // onClick={() => router.push('/')}
-              onClick={() => props.btnFunction(user, manager)}
+              onClick={() => {
+                const authority = handleLogin(phone, password);
+                if (authority === 1) {
+                  router.push('/'); // 사용자의 권한이 있는 경우 루트 경로로 이동합니다.
+                }
+                else if (authority === 2) {
+                  router.push('/predict');
+                }
+              }}
             >
               로그인
             </Button>

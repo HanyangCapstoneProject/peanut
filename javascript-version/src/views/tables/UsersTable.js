@@ -1,56 +1,42 @@
-// ** MUI Imports
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// * src/views/tables/UserTable.js
+import React, { useState } from 'react';
 
-import Paper from '@mui/material/Paper'
-import Chip from '@mui/material/Chip'
-import Table from '@mui/material/Table'
-import TableRow from '@mui/material/TableRow'
-import TableHead from '@mui/material/TableHead'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
-import TablePagination from '@mui/material/TablePagination'
+import Paper from '@mui/material/Paper';
+import Chip from '@mui/material/Chip';
+import Table from '@mui/material/Table';
+import TableRow from '@mui/material/TableRow';
+import TableHead from '@mui/material/TableHead';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TablePagination from '@mui/material/TablePagination';
 
-
+import UserList from 'src/components/UserList';
 
 function UsersTable() {
-  const [page, setPage] = useState(0)
-  const [rowsPerPage, setRowsPerPage] = useState(10)
-  const [user_t, setUserT] = useState([]);
+  // 페이지 상태를 정의합니다.
+  const [page, setPage] = useState(0);
+  // 페이지 당 행 수 상태를 정의합니다.
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  // userList를 가져옵니다.
+  const userList = UserList();
 
+  // 페이지 변경 핸들러
   const handleChangePage = (event, newPage) => {
-    setPage(newPage)
-  }
+    setPage(newPage);
+  };
 
+  // 페이지 당 행 수 변경 핸들러
   const handleChangeRowsPerPage = event => {
-    setRowsPerPage(+event.target.value)
-    setPage(0)
-  }
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
 
+  // 사용자 권한 상태 색상 설정
   const statusObj = {
     true: { color: 'success' },
     false: { color: 'error' },
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('/api/data_user');
-        if (response.status === 200) {
-          const jsonData = response.data;
-          setUserT(Array.isArray(jsonData.user_t) ? jsonData.user_t : [jsonData.user_t]);
-          // console.log(jsonData);
-        } else {
-          console.error('Failed to fetch data');
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -58,7 +44,7 @@ function UsersTable() {
         <Table sx={{ minWidth: 800 }} aria-label='table in dashboard'>
           <TableHead>
             <TableRow>
-              <TableCell align="center">번호</TableCell> 
+              <TableCell align="center">번호</TableCell>
               <TableCell align="center">이름</TableCell>
               <TableCell align="center">전화번호</TableCell>
               <TableCell align="center">비밀번호</TableCell>
@@ -66,7 +52,8 @@ function UsersTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {user_t.map(row => (
+            {/* userList가 존재하고 비어있지 않은 경우 */}
+            {userList && userList.length > 0 ? userList.map(row => (
               <TableRow key={row.users_key}>
                 <TableCell sx={{ fontSize: '1rem', color: 'black' }} align="center">{row.users_key}</TableCell>
                 <TableCell sx={{ fontSize: '1rem', color: 'black' }} align="center">{row.users_name}</TableCell>
@@ -84,19 +71,26 @@ function UsersTable() {
                   />
                 </TableCell>
               </TableRow>
-            ))}
+            )) : (
+              // 데이터가 없는 경우를 처리합니다.
+              <TableRow>
+                <TableCell colSpan={5} align="center">
+                  No data available
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </TableContainer>
       <TablePagination
-      rowsPerPageOptions={[10, 25, 100]}
-      component='div'
-      // count={rows.length} 
-      rowsPerPage={rowsPerPage}
-      page={page}
-      onPageChange={handleChangePage}
-      onRowsPerPageChange={handleChangeRowsPerPage}
-    />
+        rowsPerPageOptions={[10, 25, 100]}
+        component='div'
+        count={userList.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
     </Paper>
   );
 }

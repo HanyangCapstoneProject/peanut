@@ -58,7 +58,7 @@ const BleScanner = () => {
   // 주석: 평균 값을 백엔드로 전송하는 함수입니다.
   const sendAverageToBackend = async (deviceId, averageValue) => {
     try {
-      await axios.post('https://your-backend-url.com/api/sensor-data', {
+      await axios.post('https://local:8089/api/sensor-data', {
         deviceId,
         averageValue,
       });

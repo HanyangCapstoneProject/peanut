@@ -19,10 +19,10 @@ const TypographyPage = () => {
         <Typography variant='body2'>콘크리트 정보 페이지입니다</Typography>
       </Grid>
       <Grid item xs={12}>
-        <PredictCard />
+        <AnalysisCard />
       </Grid>
       <Grid item xs={12}>
-        <AnalysisCard />
+        <PredictCard />
       </Grid>
     </Grid>
   )

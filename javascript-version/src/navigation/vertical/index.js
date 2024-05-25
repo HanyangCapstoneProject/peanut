@@ -9,7 +9,7 @@ const navigation = (userRole) => {
       path: '/'
     },
     {
-      title: '건설현장',
+      title: '건설 현장',
       icon: Domain,
       path: '/site-info'
     },
@@ -17,20 +17,20 @@ const navigation = (userRole) => {
       sectionTitle: '콘크리트 양생'
     },
     {
-      title: '콘크리트 정보',
-      icon: ClockOutline,
-      path: '/predict'
-    },
-    {
-      title: '센서 모니터링',
-      icon: Monitor,
-      path: '/mornitoring'
-    },
-    {
       title: '센서 관리',
       icon: AccessPoint,
       path: '/sensors',
       // adminOnly: true // 관리자 전용 항목 표시
+    },
+    {
+      title: '센싱 & 모니터링',
+      icon: Monitor,
+      path: '/mornitoring'
+    },
+    {
+      title: '콘크리트 분석',
+      icon: ClockOutline,
+      path: '/predict'
     },
     {
       title: '전체 일정표',

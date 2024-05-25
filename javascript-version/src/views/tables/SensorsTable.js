@@ -1,23 +1,22 @@
+// * src/views/tables/SensorTable.js
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 
 import Paper from '@mui/material/Paper'
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
 import Chip from '@mui/material/Chip';
 import Table from '@mui/material/Table';
 import TableRow from '@mui/material/TableRow';
 import TableHead from '@mui/material/TableHead';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
-import Typography from '@mui/material/Typography';
 import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination'
+
+import SensorList from 'src/components/SensorList';
 
 function SensorsTable() {
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
-  const [sensor_t, setSensorT] = useState([]);
+  const sensorList = SensorList();
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage)
@@ -34,25 +33,6 @@ function SensorsTable() {
     3: { color: 'warning' }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('/api/data_sensor');
-        if (response.status === 200) {
-          const jsonData = response.data;
-          setSensorT(Array.isArray(jsonData.sensor_t) ? jsonData.sensor_t : [jsonData.sensor_t]);
-          console.log(jsonData.sensor_t);
-        } else {
-          console.error('Failed to fetch data');
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer>
@@ -67,7 +47,7 @@ function SensorsTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {sensor_t.map((row) => (
+            {sensorList.map((row) => (
               <TableRow key={row.sensor_key}>
                 <TableCell sx={{ fontSize: '1rem', color: 'black' }} align="center">{row.sensor_key}</TableCell>
                 <TableCell sx={{ fontSize: '1rem', color: 'black' }} align="center">{row.sensor_type}</TableCell>
