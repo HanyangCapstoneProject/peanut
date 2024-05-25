@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
+import Divider from '@mui/material/Divider'
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link'
 import Paper from '@mui/material/Paper';
@@ -14,12 +15,13 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton'
+import Button from '@mui/material/Button';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
 
 // ** Icons Imports
 import DotsVertical from 'mdi-material-ui/DotsVertical'
 
-import BleScanner from 'src/components/BleScanner';
+import FindSensor from 'src/views/form-layouts/FindSensor'
 
 const initialData = [
   { id: '1', name: 'Sensor 1', value: 20, timestamp: '2024-05-22 10:00:00' },
@@ -45,17 +47,72 @@ const SensorMonitor = () => {
 
   return (
     <Grid container spacing={6}>
+
       <Grid item xs={12}>
         <Typography variant='h5'>
           <Link href='https://mui.com/components/tables/' target='_blank'>
-            센서 모니터링
+            센싱 값 받기
           </Link>
         </Typography>
         <Typography variant='body2'>센서 모니터링 페이지입니다</Typography>
       </Grid>
 
       <Grid item xs={12}>
+        <Card>
+          <CardHeader
+            title='1단계 - BLE 센서 연결하기'
+            titleTypographyProps={{ sx: { lineHeight: '1.6 !important', letterSpacing: '0.15px !important' } }}
+            action={
+              <IconButton size='small' aria-label='settings' className='card-more-options' sx={{ color: 'text.secondary' }}>
+                <DotsVertical />
+              </IconButton>
+            }
+          />
+          <Divider sx={{ margin: 0 }} />
+          <CardContent sx={{ pt: theme => `${theme.spacing(2.25)} !important` }}>
+            <FindSensor />
+
+          </CardContent>
+        </Card>
+      </Grid>
+
+
+      <Grid item xs={12}>
+        <Card>
+          <CardHeader
+            title='2단계 - 실시간 모니터링'
+            titleTypographyProps={{ sx: { lineHeight: '1.6 !important', letterSpacing: '0.15px !important' } }}
+            action={
+              <IconButton size='small' aria-label='settings' className='card-more-options' sx={{ color: 'text.secondary' }}>
+                <DotsVertical />
+              </IconButton>
+            }
+          />
+          <Divider sx={{ margin: 0 }} />
+          <CardContent sx={{ pt: theme => `${theme.spacing(2.25)} !important` }}>
+            <LineChart width={1200} height={300} data={sensorData}>
+              <Line type="monotone" dataKey="value" stroke="#8884d8" />
+              <CartesianGrid stroke="#ccc" />
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+            </LineChart>
+          </CardContent>
+        </Card>
+      </Grid>
+
+      <Grid item xs={12}>
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+          <CardHeader
+            title='3단계 - 센서 값 모으기'
+            titleTypographyProps={{ sx: { lineHeight: '1.6 !important', letterSpacing: '0.15px !important' } }}
+            action={
+              <IconButton size='small' aria-label='settings' className='card-more-options' sx={{ color: 'text.secondary' }}>
+                <DotsVertical />
+              </IconButton>
+            }
+          />
+          <Divider sx={{ margin: 0 }} />
           <TableContainer>
             <Table sx={{ minWidth: 800 }} aria-label='table in dashboard'>
               <TableHead>
@@ -78,48 +135,17 @@ const SensorMonitor = () => {
               </TableBody>
             </Table>
           </TableContainer>
+          <CardContent>
+            <Button
+              fullWidth
+              variant='contained'
+            >
+              평균 값 전송하기
+            </Button>
+          </CardContent>
         </Paper>
       </Grid>
 
-      <Grid item xs={12}>
-        <Card>
-          <CardHeader
-            title='실시간 센서 상황'
-            titleTypographyProps={{ sx: { lineHeight: '1.6 !important', letterSpacing: '0.15px !important' } }}
-            action={
-              <IconButton size='small' aria-label='settings' className='card-more-options' sx={{ color: 'text.secondary' }}>
-                <DotsVertical />
-              </IconButton>
-            }
-          />
-          <CardContent sx={{ pt: theme => `${theme.spacing(2.25)} !important` }}>
-            <LineChart width={1200} height={300} data={sensorData}>
-              <Line type="monotone" dataKey="value" stroke="#8884d8" />
-              <CartesianGrid stroke="#ccc" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-            </LineChart>
-          </CardContent>
-        </Card>
-      </Grid>
-
-      <Grid item xs={12}>
-        <Card>
-          <CardHeader
-            title='BLE 센서 스캐너'
-            titleTypographyProps={{ sx: { lineHeight: '1.6 !important', letterSpacing: '0.15px !important' } }}
-            action={
-              <IconButton size='small' aria-label='settings' className='card-more-options' sx={{ color: 'text.secondary' }}>
-                <DotsVertical />
-              </IconButton>
-            }
-          />
-          <CardContent sx={{ pt: theme => `${theme.spacing(2.25)} !important` }}>
-            <BleScanner />
-          </CardContent>
-        </Card>
-      </Grid>
     </Grid>
   );
 };

@@ -23,13 +23,15 @@ const BleScanner = () => {
 
   return (
     <div>
-      <Button 
+      <Button size='large' 
+        type='submit' 
+        sx={{ mr: 2 }} 
         fullWidth 
         variant='contained'
         onClick={scanForDevices}
       >
         주변 센서 찾기
-      </Button>
+      </Button >
       {devices.length > 0 && (
         <ul>
           {devices.map((device, index) => (
