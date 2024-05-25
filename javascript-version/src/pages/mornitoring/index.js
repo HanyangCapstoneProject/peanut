@@ -1,11 +1,11 @@
-// SensorMonitor Page
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
-import Divider from '@mui/material/Divider'
+import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link'
+import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -14,14 +14,14 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton'
+import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
 
 // ** Icons Imports
-import DotsVertical from 'mdi-material-ui/DotsVertical'
+import DotsVertical from 'mdi-material-ui/DotsVertical';
 
-import FindSensor from 'src/views/form-layouts/FindSensor'
+import FindSensor from 'src/views/form-layouts/FindSensor';
 
 const initialData = [
   { id: '1', name: 'Sensor 1', value: 20, timestamp: '2024-05-22 10:00:00' },
@@ -29,8 +29,14 @@ const initialData = [
   // 초기 데이터 추가
 ];
 
+const initialMeanData = [
+  { id: '1', temp: '25.3', humi: '100' },
+  { id: '2', temp: '25.2', humi: '99' },
+];
+
 const SensorMonitor = () => {
   const [sensorData, setSensorData] = useState(initialData);
+  const [meanData, setMeanData] = useState(initialMeanData);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -45,9 +51,69 @@ const SensorMonitor = () => {
     return () => clearInterval(interval);
   }, [sensorData]);
 
+  // 현재 날짜 출력
+  const [currentDate, setCurrentDate] = useState('');
+
+  useEffect(() => {
+    const updateDate = () => {
+      const today = new Date();
+      const formattedDate = today.toLocaleDateString(); // 날짜만 가져오기
+      setCurrentDate(formattedDate);
+    };
+
+    updateDate(); // 컴포넌트가 마운트될 때 한 번 설정
+
+    const interval = setInterval(updateDate, 1000 * 60 * 60 * 24); // 하루에 한 번 업데이트
+
+    return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 정리
+  }, []);
+
+  // States
+  const [sensor_mac, setSensor_mac] = useState(initialMeanData[0].id);
+  const [sensor_temp, setSensor_temp] = useState(initialMeanData[0].temp);
+  const [sensor_humi, setSensor_humi] = useState(initialMeanData[0].humi);
+  const [sensor_time, setSensor_time] = useState(currentDate);
+
+  const handleSensorMacChange = (event) => {
+    setSensor_mac(event.target.value);
+  };
+
+  const handleSensorTempChange = (event) => {
+    setSensor_temp(event.target.value);
+  };
+
+  const handleSensorHumiChange = (event) => {
+    setSensor_humi(event.target.value);
+  };
+
+  const handleSensorTimeChange = (date) => {
+    setSensor_time(date);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const fetchData = async () => {
+      try {
+        await axios.post('/api/sensing', {
+          sensor_mac: sensor_mac,
+          sensor_temp: sensor_temp,
+          sensor_humi: sensor_humi,
+          sensor_time: sensor_time,
+        });
+        console.log("성공");
+        // 성공적으로 데이터가 추가되었음을 알리는 알림 등을 표시할 수 있습니다.
+      } catch (error) {
+        console.log("문제발생!");
+        console.log(sensor_mac);
+        console.error(error);
+        // 오류가 발생했을 때 사용자에게 알리는 메시지를 표시할 수 있습니다.
+      }
+    };
+    fetchData();
+  };
+
   return (
     <Grid container spacing={6}>
-
       <Grid item xs={12}>
         <Typography variant='h5'>
           <Link href='https://mui.com/components/tables/' target='_blank'>
@@ -71,11 +137,9 @@ const SensorMonitor = () => {
           <Divider sx={{ margin: 0 }} />
           <CardContent sx={{ pt: theme => `${theme.spacing(2.25)} !important` }}>
             <FindSensor />
-
           </CardContent>
         </Card>
       </Grid>
-
 
       <Grid item xs={12}>
         <Card>
@@ -139,13 +203,13 @@ const SensorMonitor = () => {
             <Button
               fullWidth
               variant='contained'
+              onClick={handleSubmit}
             >
               평균 값 전송하기
             </Button>
           </CardContent>
         </Paper>
       </Grid>
-
     </Grid>
   );
 };

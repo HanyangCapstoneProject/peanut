@@ -16,10 +16,10 @@ export default async function handler(req, res) {
       const { sensing_time, sensing_goal, sensing_data, curing_date } = req.body;
       await axios.post('http://localhost:8089/api/sensing',
       {
-        sensing_time: sensing_time,
-        sensing_goal: sensing_goal,
-        sensing_data: sensing_data,
-        curing_date: curing_date,
+        sensor_mac: sensor_mac,
+        sensor_temp: sensor_temp,
+        sensor_humi: sensor_humi,
+        sensor_time: sensor_time,
       });
       console.log('데이터가 성공적으로 전송되었습니다.');
     } else {
