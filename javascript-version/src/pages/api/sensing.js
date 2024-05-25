@@ -13,7 +13,7 @@ export default async function handler(req, res) {
       res.status(200).json({ sensing_t });
     } else if (req.method === 'POST') {
       // POST 요청: 클라이언트로부터 받은 센서 정보를 데이터베이스에 추가
-      const { sensing_time, sensing_goal, sensing_data, curing_date } = req.body;
+      const { sensor_mac, sensor_temp, sensor_humi, sensor_time } = req.body;
       await axios.post('http://localhost:8089/api/sensing',
       {
         sensor_mac: sensor_mac,
