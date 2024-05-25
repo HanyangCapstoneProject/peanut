@@ -27,25 +27,28 @@ const navigation = (userRole) => {
       path: '/mornitoring'
     },
     {
+      title: '센서 관리',
+      icon: AccessPoint,
+      path: '/sensors',
+      // adminOnly: true // 관리자 전용 항목 표시
+    },
+    {
       title: '전체 일정표',
       icon: Calendar,
       path: '/calendar'
     },
     {
-      sectionTitle: '관리자 페이지',
-      adminOnly: true // 관리자 전용 섹션 표시
-    },
-    {
-      title: '센서 관리',
-      icon: AccessPoint,
-      path: '/sensors',
-      adminOnly: true // 관리자 전용 항목 표시
+      sectionTitle: '관리자 전용',
+      // adminOnly: true // 관리자 전용 섹션 표시
     },
     {
       title: '사용자 관리',
       icon: AccountCogOutline,
       path: '/users',
-      adminOnly: true // 관리자 전용 항목 표시
+      // adminOnly: true // 관리자 전용 항목 표시
+    },
+    {
+      sectionTitle: '계정',
     },
     {
       title: '로그아웃',

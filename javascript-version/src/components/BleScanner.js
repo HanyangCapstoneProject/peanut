@@ -1,5 +1,6 @@
 // components/BleScanner.js
 import { useState } from 'react';
+import Button from '@mui/material/Button';
 
 const BleScanner = () => {
   const [devices, setDevices] = useState([]);
@@ -22,7 +23,13 @@ const BleScanner = () => {
 
   return (
     <div>
-      <button onClick={scanForDevices}>센서를 스캔합니다.</button>
+      <Button 
+        fullWidth 
+        variant='contained'
+        onClick={scanForDevices}
+      >
+        주변 센서 찾기
+      </Button>
       {devices.length > 0 && (
         <ul>
           {devices.map((device, index) => (
