@@ -1,4 +1,8 @@
 import React, { forwardRef, useState } from 'react'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
+import axios from 'axios';
+
 import Card from '@mui/material/Card'
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
@@ -12,12 +16,9 @@ import CardContent from '@mui/material/CardContent'
 import CardActions from '@mui/material/CardActions'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
-import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
-import axios from 'axios';
-
 
 import BleScanner from 'src/components/BleScanner';
+import SensorList from 'src/components/SensorList';
 
 const CustomInput = forwardRef((props, ref) => {
   return <TextField fullWidth {...props} inputRef={ref} label='센서 설치 일시' autoComplete='off' />
@@ -29,6 +30,8 @@ const FormLayoutsSeparator = () => {
   const [sensor_type, setSensor_type] = useState('');
   const [sensor_use, setSensor_use] = useState('');
   const [sensor_install, setSensor_install] = useState(null);
+
+  const sensorList = SensorList();
 
   const handleSensorMacChange = (event) => {
     setSensor_mac(event.target.value);
@@ -68,75 +71,66 @@ const FormLayoutsSeparator = () => {
     fetchData();
   };
 
-
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        
-          <Grid container spacing={5}>
-            <Grid item xs={12}>
-              <Typography variant='body2' sx={{ fontWeight: 600 }}>
-                센서 정보로 찾기
-              </Typography>
-            </Grid>
 
-            <Grid item xs={12} sm={6}>
-              <TextField
-                fullWidth
+        <Grid container spacing={5}>
+          <Grid item xs={12}>
+            <Typography variant='body2' sx={{ fontWeight: 600 }}>
+              센서 정보로 찾기
+            </Typography>
+          </Grid>
+
+          <Grid item xs={12}>
+            <FormControl fullWidth>
+              <InputLabel id='sensor-mac'>센서 장치 번호</InputLabel>
+              <Select
                 label='센서 장치 번호'
-                placeholder='carterLeonard'
                 value={sensor_mac}
                 onChange={handleSensorMacChange}
-              />
-            </Grid>
-
-            <Grid item xs={12} sm={6}>
-              <FormControl fullWidth>
-                <InputLabel id='sensor-type-label'>센서 종류</InputLabel>
-                <Select
-                  label='Type'
-                  value={sensor_type}
-                  onChange={handleSensorTypeChange}
-                  labelId='sensor-type-label'
-                >
-                  <MenuItem value='온도'>온도</MenuItem>
-                  <MenuItem value='습도'>습도</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-
-            <Grid item xs={12} sm={6}>
-              <FormControl fullWidth>
-                <InputLabel id='sensor-status-label'>센서 사용 여부</InputLabel>
-                <Select
-                  label='Status'
-                  value={sensor_use}
-                  onChange={handleSensorUseChange}
-                  labelId='sensor-status-label'
-                >
-                  <MenuItem value='1'>사용</MenuItem>
-                  <MenuItem value='2'>사용 안함</MenuItem>
-                  <MenuItem value='3'>미설치</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-
-            <Grid item xs={12} sm={6}>
-              <DatePicker
-                selected={sensor_install}
-                showYearDropdown
-                showMonthDropdown
-                placeholderText='MM-DD-YYYY'
-                customInput={<CustomInput />}
-                id='sensor-installation-date'
-                onChange={handleSensorInstallChange}
-              />
-            </Grid>
-            <Grid item xs={12} >
-          <BleScanner />
+                labelId='sensor-mac'
+              >
+                {sensorList.map(row => (
+                  <MenuItem value='mac'>{row.sensor_mac}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <FormControl fullWidth>
+              <InputLabel id='sensor-status-label'>센서 사용 여부</InputLabel>
+              <Select
+                label='Status'
+                value={sensor_use}
+                onChange={handleSensorUseChange}
+                labelId='sensor-status-label'
+              >
+                <MenuItem value='1'>사용</MenuItem>
+                <MenuItem value='2'>사용 안함</MenuItem>
+                <MenuItem value='3'>미설치</MenuItem>
+              </Select>
+            </FormControl>
           </Grid>
-        
+
+          <Grid item xs={12} sm={6}>
+            <DatePicker
+              selected={sensor_install}
+              showYearDropdown
+              showMonthDropdown
+              placeholderText='MM-DD-YYYY'
+              customInput={<CustomInput />}
+              id='sensor-installation-date'
+              onChange={handleSensorInstallChange}
+            />
+          </Grid>
+
+          <Grid item xs={12} >
+            <BleScanner />
+          </Grid>
+
+        </Grid>
       </form>
     </div>
   );

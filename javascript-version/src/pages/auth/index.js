@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 // MUI 불러오기
 import Grid from '@mui/material/Grid'
 
-import LoginPage from '../../views/auth/LoginPage';
+import LoginForm from '../../views/form-layouts/LoginForm';
 
 export default function Home(props) {
   const router = useRouter();
@@ -25,7 +25,7 @@ export default function Home(props) {
       alignItems="center"
       my={20}
     >
-      <LoginPage type="home" btnFunction={handleJoinRoom} />
+      <LoginForm type="home" btnFunction={handleJoinRoom} />
     </Grid>
   );
 }
