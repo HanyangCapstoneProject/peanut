@@ -15,8 +15,8 @@ import MuiTab from '@mui/material/Tab'
 import { Domain, InformationOutline } from 'mdi-material-ui'
 
 // ** Demo Tabs Imports
-import SiteAccount from 'src/views/account-settings/SiteAccount'
 import SiteInfo from 'src/views/account-settings/SiteInfo'
+import SiteInfo2 from 'src/views/account-settings/SiteInfo2'
 
 // ** Third Party Styles Imports
 import 'react-datepicker/dist/react-datepicker.css'
@@ -67,7 +67,7 @@ const AccountSettings = () => {
         </TabList>
 
         <TabPanel sx={{ p: 0 }} value='account'>
-          <SiteAccount />
+          <SiteInfo />
         </TabPanel>
       </TabContext>
     </Card>

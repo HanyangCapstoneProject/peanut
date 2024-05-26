@@ -7,6 +7,7 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import CardContent from '@mui/material/CardContent'
 import { styled, useTheme } from '@mui/material/styles'
+import SiteInfoList from 'src/components/SiteInfoList';
 
 // 배경 삼각형 이미지
 const TriangleImg = styled('img')({
@@ -35,6 +36,8 @@ const State = () => {
   // 현재 날짜 출력
   const [currentDate, setCurrentDate] = useState('');
 
+  const siteInfoList = SiteInfoList();
+
   useEffect(() => {
     const updateDate = () => {
       const today = new Date();
@@ -56,9 +59,9 @@ const State = () => {
   return (
     <Card sx={{ position: 'relative' }}>
       <CardContent>
-        <Typography variant='h6'>강남구 힐스테이트</Typography>
+        <Typography variant='h6'>{siteInfoList[0]?.site_name}</Typography>
         <Typography variant='body2' sx={{ letterSpacing: '0.25px' }}>
-          KDS 41 10 00:2014
+          {siteInfoList[0]?.site_code}
         </Typography>
         <Typography variant='h5' sx={{ my: 4, color: 'primary.main' }}>
           {currentDate}

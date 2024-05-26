@@ -10,7 +10,7 @@ const SiteInfoList = () => {
     const fetchData = async () => {
       try {
         // API 호출을 통해 데이터를 가져옵니다.
-        const response = await axios.get('/api/data_site');
+        const response = await axios.get('/api/site');
         if (response.status === 200) {
           const jsonData = response.data;
           // 데이터를 배열로 설정합니다.
