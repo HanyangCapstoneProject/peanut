@@ -1,30 +1,34 @@
-import { useRouter } from 'next/router'
+// * src/views/cards/AnalysisCard.js
+import { useRouter } from 'next/router';
 
-// ** MUI Imports
-import Box from '@mui/material/Box'
-import Card from '@mui/material/Card'
-import Button from '@mui/material/Button'
-import { useTheme } from '@mui/material/styles'
-import CardHeader from '@mui/material/CardHeader'
-import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
-import CardContent from '@mui/material/CardContent'
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import Button from '@mui/material/Button';
+import { useTheme } from '@mui/material/styles';
+import CardHeader from '@mui/material/CardHeader';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import CardContent from '@mui/material/CardContent';
 
-// ** Icons Imports
-import DotsVertical from 'mdi-material-ui/DotsVertical'
+import DotsVertical from 'mdi-material-ui/DotsVertical';
+import ReactApexcharts from 'src/@core/components/react-apexcharts';
 
-// ** Custom Components Imports
-import ReactApexcharts from 'src/@core/components/react-apexcharts'
+import ResultList from 'src/components/ResultList';
 
 const AnalysisCard = () => {
   const router = useRouter();
 
   const handlePage = () => {
-    router.push(`/mornitoring`);
+    router.push(`/monitoring`);
   };
 
-  // ** Hook
   const theme = useTheme()
+
+  const resultList = ResultList();
+
+  // resultList에서 Date 및 temp_goal 값 추출
+  const dateValues = resultList.map(item => item.date);
+  const tempGoalValues = resultList.map(item => item.temp_goal);
 
   const options = {
     chart: {
@@ -72,7 +76,7 @@ const AnalysisCard = () => {
       }
     },
     xaxis: {
-      categories: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      categories: dateValues,
       tickPlacement: 'on',
       labels: { show: false },
       axisTicks: { show: false },
@@ -102,12 +106,12 @@ const AnalysisCard = () => {
         }
       />
       <CardContent sx={{ '& .apexcharts-xcrosshairs.apexcharts-active': { opacity: 0 } }}>
-        <ReactApexcharts type='bar' height={205} options={options} series={[{ data: [37, 57, 45, 75, 57, 40, 65] }]} />
+        <ReactApexcharts type='bar' height={205} options={options} series={[{ data: tempGoalValues }]} />
         <Box sx={{ mb: 7, display: 'flex', alignItems: 'center' }}>
           <Typography variant='h5' sx={{ mr: 4 }}>
-            45%
+            현재 날짜와 같은 값의 목표 온도
           </Typography>
-          <Typography variant='body2'>진행중</Typography>
+          <Typography variant='body2'>tkdxo</Typography>
         </Box>
         <Button 
           fullWidth 

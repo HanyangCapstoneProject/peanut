@@ -1,4 +1,6 @@
-// ** MUI Imports
+// * src/views/cards/PredictCard.js
+import React, { useState, useEffect } from 'react';
+
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import Avatar from '@mui/material/Avatar'
@@ -8,9 +10,10 @@ import CardHeader from '@mui/material/CardHeader'
 import CardContent from '@mui/material/CardContent'
 import LinearProgress from '@mui/material/LinearProgress'
 
-// ** Icons Imports
 import MenuUp from 'mdi-material-ui/MenuUp'
 import DotsVertical from 'mdi-material-ui/DotsVertical'
+
+import ResultList from 'src/components/ResultList';
 
 const data = [
   {
