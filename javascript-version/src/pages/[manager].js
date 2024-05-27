@@ -4,7 +4,7 @@ import io from "socket.io-client"
 
 // 페이지 불러오기
 import DashboardPage from "src/views/dashboard/DashboardPage"
-import LoginPage from "src/views/auth/LoginPage"
+import LoginPage from "src/views/form-layouts/LoginForm"
 
 let socket;
 

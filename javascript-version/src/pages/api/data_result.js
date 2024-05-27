@@ -23,7 +23,8 @@ export default async function handler(req, res) {
         level: level,
         area: area,
         temp_goal: temp_goal,
-        date: date
+        cur_date: cur_date,
+        goal_date: goal_date
       });
       console.log('데이터가 성공적으로 전송되었습니다.');
 

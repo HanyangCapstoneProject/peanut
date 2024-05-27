@@ -17,14 +17,12 @@ export default async function handler(req, res) {
     } else if (req.method === 'POST') {
 
       // POST 요청: 클라이언트로부터 받은 일정 정보를 데이터베이스에 추가
-      const { title, start_date, end_date, level, area, color, memo } = req.body;
+      const { title, start_date, end_date, color, memo } = req.body;
       await axios.post('http://localhost:8089/api/schedule_all',
       {
         title: title,
         start_date: start_date,
         end_date: end_date,
-        level: level,
-        area: area,
         color: color,
         memo: memo,
       });

@@ -1,4 +1,5 @@
 import React, { forwardRef, useState } from 'react'
+import axios from 'axios'; 
 
 // ** MUI Imports
 import Card from '@mui/material/Card'
@@ -68,8 +69,8 @@ const FormLayoutsIcons = () => {
   const [title, setTitle] = useState('');
   const [level, setLevel] = useState('');
   const [area, setArea] = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const [start_date, setStart_date] = useState('');
+  const [end_date, setEnd_date] = useState('');
   const [color, setColor] = useState('');
   const [memo, setMemo] = useState('');
   const [open, setOpen] = React.useState(false);
@@ -87,11 +88,11 @@ const FormLayoutsIcons = () => {
   };
 
   const handleStartDateChange = (date) => {
-    setStartDate(date);
+    setStart_date(date);
   };
 
   const handleEndDateChange = (date) => {
-    setEndDate(date);
+    setEnd_date(date);
   };
 
   const handleColorChange = (event) => {
@@ -106,12 +107,12 @@ const FormLayoutsIcons = () => {
     e.preventDefault();
     const fetchData = async () => {
       try {
-        await axios.post('/api/schedule', {
+        await axios.post('/api/schedule_all', {
           title: title,
           // location: location,
-          startDate: startDate,
-          endDate: endDate,
-          // color: color,
+          start_date: start_date,
+          end_date: end_date,
+          color: color,
           memo: memo,
         });
         console.log("성공");
@@ -160,7 +161,7 @@ const FormLayoutsIcons = () => {
             
             <Grid item xs={12} sm={6}>
               <DatePicker
-                selected={startDate}
+                selected={start_date}
                 showYearDropdown
                 showMonthDropdown
                 placeholderText='MM-DD-YYYY'
@@ -171,7 +172,7 @@ const FormLayoutsIcons = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <DatePicker
-                selected={endDate}
+                selected={end_date}
                 showYearDropdown
                 showMonthDropdown
                 placeholderText='MM-DD-YYYY'

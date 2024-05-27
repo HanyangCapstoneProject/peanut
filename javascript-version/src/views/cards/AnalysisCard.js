@@ -26,8 +26,8 @@ const AnalysisCard = () => {
 
   const resultList = ResultList();
 
-  // resultList에서 Date 및 temp_goal 값 추출
-  const dateValues = resultList.map(item => item.date);
+  // resultList에서 cur_date 및 temp_goal 값 추출
+  const dateValues = resultList.map(item => item.cur_date);
   const tempGoalValues = resultList.map(item => item.temp_goal);
 
   const options = {
