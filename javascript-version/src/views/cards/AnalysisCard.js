@@ -14,6 +14,7 @@ import DotsVertical from 'mdi-material-ui/DotsVertical';
 import ReactApexcharts from 'src/@core/components/react-apexcharts';
 
 import ResultList from 'src/components/ResultList';
+import { useState, useEffect } from 'react';
 
 const AnalysisCard = () => {
   const router = useRouter();
@@ -29,6 +30,30 @@ const AnalysisCard = () => {
   // resultList에서 cur_date 및 temp_goal 값 추출
   const dateValues = resultList.map(item => item.cur_date);
   const tempGoalValues = resultList.map(item => item.temp_goal);
+
+  // 현재 날짜 출력
+  const [currentDate, setCurrentDate] = useState('');
+  const[todayGoal, setTodayGoal] = useState();
+
+  useEffect(() => {
+    const updateDate = () => {
+      const today = new Date();
+      const formattedDate = today.toLocaleDateString(); // 날짜만 가져오기
+      setCurrentDate(formattedDate);
+    };
+
+    updateDate(); // 컴포넌트가 마운트될 때 한 번 설정
+
+    const interval = setInterval(updateDate, 1000 * 60 * 60 * 24); // 하루에 한 번 업데이트
+
+    return () => clearInterval(interval); // 컴포넌트 언마운트 시 인터벌 정리
+  }, []);
+
+  dateValues.map(item => {
+    if(item.cur_date === currentDate) {
+      setTodayGoal(item.temp_goal);
+    }
+  })
 
   const options = {
     chart: {
