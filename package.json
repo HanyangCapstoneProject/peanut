@@ -1,5 +1,6 @@
 {
-  "name": "HanyangPeanut",
+  "homepage" : "https://hanyangcapstoneproject.github.io/peanut/",
+  "name": "peanut",
   "description": "캡스톤 디자인 프로젝트",
   "license": "MIT",
   "version": "1.0.0",
@@ -28,6 +29,7 @@
     "themeselection"
   ],
   "scripts": {
+    "deploy": "gh-pages -d public",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -50,6 +52,7 @@
     "chart.js": "^4.4.3",
     "clsx": "^1.1.1",
     "eslint-plugin-react": "^7.29.4",
+    "gh-pages": "^6.1.1",
     "mdi-material-ui": "^7.1.0",
     "moment": "^2.30.1",
     "next": "12.0.4",
@@ -69,7 +72,9 @@
     "sass-loader": "^14.1.0",
     "socket.io": "^4.7.5",
     "socket.io-client": "^4.7.5",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "dotenv": "^16.3.1",
+    "express": "4.18.2"
   },
   "devDependencies": {
     "css-loader": "^6.10.0",
