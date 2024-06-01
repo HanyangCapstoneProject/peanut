@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
-import CardContent from '@mui/material/CardContent';
-
-// 테이블 MUI
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -19,11 +16,12 @@ const BleScanner = () => {
   const [timeStamps, setTimeStamps] = useState([]); // 시간 이력
   const [page, setPage] = useState(1); // 현재 페이지
   const [rowsPerPage] = useState(30); // 페이지 당 행 수
+  const [num, setNum] = useState(0); // 센싱한 개수
 
   const scanForDevices = async () => {
     try {
       const device = await navigator.bluetooth.requestDevice({
-        filters: [{ namePrefix: 'TH' }],
+        filters: [{ namePrefix: 'S' }],
         optionalServices: ['battery_service'],
       });
 
@@ -65,11 +63,14 @@ const BleScanner = () => {
       setBatteryLevels((prevLevels) => [...prevLevels, batteryLevel]);
       setTimeStamps((prevTimes) => [...prevTimes, formattedDateTime]);
 
-      // 최근 10개 이력만 유지
-      if (batteryLevels.length >= 10) {
+      // 최근 30개 이력만 유지
+      if (batteryLevels.length > 30) {
         setBatteryLevels((prevLevels) => prevLevels.slice(1));
         setTimeStamps((prevTimes) => prevTimes.slice(1));
       }
+
+      // 센싱한 개수 업데이트
+      setNum((prevNum) => prevNum + 1);
     } catch (error) {
       console.error('Error reading battery level:', error);
     }
@@ -129,7 +130,7 @@ const BleScanner = () => {
                 ).map((level, index) => (
                   <TableRow key={index}>
                     <TableCell sx={{ fontSize: '1rem', color: 'black' }} align="center">
-                    3Q/7yaAOKpw/wwSOZx0Qog==
+                      3
                     </TableCell>
                     <TableCell sx={{ fontSize: '1rem', color: 'black' }} align="center">
                       {level}%
@@ -149,18 +150,31 @@ const BleScanner = () => {
         </div>
       )}
 
-      <Button
-        size="large"
-        type="submit"
-        sx={{ mr: 2, my: 2 }}
-        fullWidth
-        variant="contained"
-        onClick={scanForDevices}
-      >
-        평균 값 전송하기
-      </Button>
+      {num < 30 ? (
+        <Button
+          size="large"
+          type="submit"
+          sx={{ mr: 2, my: 2 }}
+          fullWidth
+          variant="contained"
+          color='secondary'
+        >
+          ({num}/30) 평균 값 계산 중
+        </Button>
+      ) : (
+        <Button
+          size="large"
+          type="submit"
+          sx={{ mr: 2, my: 2 }}
+          fullWidth
+          variant="contained"
+        >
+          (30/30) 평균 값 전송하기
+        </Button>
+      )}
     </div>
   );
 };
 
 export default BleScanner;
+

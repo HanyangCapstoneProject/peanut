@@ -129,16 +129,6 @@ const SensorMonitor = () => {
 
       <Grid item xs={12}>
         <Card>
-          <CardHeader
-            title='1단계 - BLE 센서 연결하기'
-            titleTypographyProps={{ sx: { lineHeight: '1.6 !important', letterSpacing: '0.15px !important' } }}
-            action={
-              <IconButton size='small' aria-label='settings' className='card-more-options' sx={{ color: 'text.secondary' }}>
-                <DotsVertical />
-              </IconButton>
-            }
-          />
-          <Divider sx={{ margin: 0 }} />
           <CardContent sx={{ pt: theme => `${theme.spacing(2.25)} !important` }}>
             <FindSensor />
           </CardContent>
