@@ -1,5 +1,9 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
@@ -30,8 +34,8 @@ const initialData = [
 ];
 
 const initialMeanData = [
-  { id: '1', temp: '25.3', humi: '100' },
-  { id: '2', temp: '25.2', humi: '99' },
+  { number: '1', id: '1', temp: '25.3', humi: '100', timestamp: '2024-05-22 10:00:00' },
+  { number: '2', id: '1', temp: '25.2', humi: '99', timestamp: '2024-05-22 10:00:00' },
 ];
 
 const SensorMonitor = () => {
@@ -141,7 +145,7 @@ const SensorMonitor = () => {
         </Card>
       </Grid>
 
-      <Grid item xs={12}>
+      {/* <Grid item xs={12}>
         <Card>
           <CardHeader
             title='2단계 - 실시간 모니터링'
@@ -209,7 +213,7 @@ const SensorMonitor = () => {
             </Button>
           </CardContent>
         </Paper>
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 };
