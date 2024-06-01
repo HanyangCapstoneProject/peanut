@@ -129,46 +129,42 @@ const NotificationDropdown = () => {
           </Box>
         </MenuItem>
         <ScrollWrapper>
-          {errorNotiData.map((item, index) => {
-            return(
-          <MenuItem onClick={handleDropdownClose}>
-            <Box sx={{ width: '100%', display: 'flex', alignItems: 'center' }}>
-            <img src={item.logo} alt={item.title} width={item.logoWidth} height={item.logoHeight} />
-              <Box sx={{ mx: 4, flex: '1 1', display: 'flex', overflow: 'hidden', flexDirection: 'column' }}>
-                <MenuItemTitle>{item.title}</MenuItemTitle>
-                <MenuItemSubtitle variant='body2'>{item.subtitle}</MenuItemSubtitle>
+          {errorNotiData.map((item, index) => (
+            <MenuItem key={`error-${index}`} onClick={handleDropdownClose}>
+              <Box sx={{ width: '100%', display: 'flex', alignItems: 'center' }}>
+                <img src={item.logo} alt={item.title} width={item.logoWidth} height={item.logoHeight} />
+                <Box sx={{ mx: 4, flex: '1 1', display: 'flex', overflow: 'hidden', flexDirection: 'column' }}>
+                  <MenuItemTitle>{item.title}</MenuItemTitle>
+                  <MenuItemSubtitle variant='body2'>{item.subtitle}</MenuItemSubtitle>
+                </Box>
+                <Typography variant='subtitle2' sx={{ fontWeight: 600, color: 'success.main' }}>
+                  {item.amount}
+                </Typography>
               </Box>
-              <Typography variant='subtitle2' sx={{ fontWeight: 600, color: 'success.main' }}>
-                {item.amount}
-              </Typography>
-            </Box>
-          </MenuItem>
-          )
-          })}
-          {changeNotiData.map((item, index) => {
-            return(
-          <MenuItem onClick={handleDropdownClose}>
-            <Box sx={{ width: '100%', display: 'flex', alignItems: 'center' }}>
-            <img src={item.logo} alt={item.title} width={item.logoWidth} height={item.logoHeight} />
-              <Box sx={{ mx: 4, flex: '1 1', display: 'flex', overflow: 'hidden', flexDirection: 'column' }}>
-                <MenuItemTitle>{item.title}</MenuItemTitle>
-                <MenuItemSubtitle variant='body2'>{item.subtitle}</MenuItemSubtitle>
+            </MenuItem>
+          ))}
+          {changeNotiData.map((item, index) => (
+            <MenuItem key={`change-${index}`} onClick={handleDropdownClose}>
+              <Box sx={{ width: '100%', display: 'flex', alignItems: 'center' }}>
+                <img src={item.logo} alt={item.title} width={item.logoWidth} height={item.logoHeight} />
+                <Box sx={{ mx: 4, flex: '1 1', display: 'flex', overflow: 'hidden', flexDirection: 'column' }}>
+                  <MenuItemTitle>{item.title}</MenuItemTitle>
+                  <MenuItemSubtitle variant='body2'>{item.subtitle}</MenuItemSubtitle>
+                </Box>
+                <Typography variant='subtitle2' sx={{ fontWeight: 600, color: 'success.main' }}>
+                  {item.amount}
+                </Typography>
               </Box>
-              <Typography variant='subtitle2' sx={{ fontWeight: 600, color: 'success.main' }}>
-                {item.amount}
-              </Typography>
-            </Box>
-          </MenuItem>
-          )
-          })}
-          </ScrollWrapper>
+            </MenuItem>
+          ))}
+        </ScrollWrapper>
         <MenuItem
           disableRipple
           sx={{ py: 3.5, borderBottom: 0, borderTop: theme => `1px solid ${theme.palette.divider}` }}
         >
           <Button 
             fullWidth variant='contained' 
-            onClick={() => handlePage()}
+            onClick={handlePage}
           >
             전체 알림 확인하기
           </Button>

@@ -45,6 +45,7 @@ const FormLayoutsSeparator = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const fetchData = async () => {
       try {
         await axios.post('/api/data_sensor', {
@@ -54,11 +55,13 @@ const FormLayoutsSeparator = () => {
           sensor_use: sensor_use,
         });
         console.log("성공");
+
         // 성공적으로 데이터가 추가되었음을 알리는 알림 등을 표시할 수 있습니다.
       } catch (error) {
         console.log("문제발생!");
         console.log(sensor_mac);
         console.error(error);
+
         // 오류가 발생했을 때 사용자에게 알리는 메시지를 표시할 수 있습니다.
       }
     };

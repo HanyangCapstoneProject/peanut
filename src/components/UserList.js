@@ -13,6 +13,7 @@ const UserList = () => {
         const response = await axios.get('/api/data_user');
         if (response.status === 200) {
           const jsonData = response.data;
+
           // 데이터를 배열로 설정합니다.
           setUserList(Array.isArray(jsonData.userList) ? jsonData.userList : [jsonData.userList]);
         } else {

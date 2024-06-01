@@ -22,7 +22,7 @@ import SensorList from 'src/components/SensorList';
 
 const CustomInput = forwardRef((props, ref) => {
   return <TextField fullWidth {...props} inputRef={ref} label='센서 설치 일시' autoComplete='off' />
-})
+});
 
 const FormLayoutsSeparator = () => {
   // States
@@ -51,30 +51,29 @@ const FormLayoutsSeparator = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const fetchData = async () => {
-      try {
-        await axios.post('/api/data_sensor', {
-          sensor_mac: sensor_mac,
-          sensor_type: sensor_type,
-          sensor_install: sensor_install,
-          sensor_use: sensor_use,
-        });
-        console.log("성공");
-        // 성공적으로 데이터가 추가되었음을 알리는 알림 등을 표시할 수 있습니다.
-      } catch (error) {
-        console.log("문제발생!");
-        console.log(sensor_mac);
-        console.error(error);
-        // 오류가 발생했을 때 사용자에게 알리는 메시지를 표시할 수 있습니다.
-      }
-    };
-    fetchData();
+
+    try {
+      await axios.post('/api/data_sensor', {
+        sensor_mac,
+        sensor_type,
+        sensor_install,
+        sensor_use,
+      });
+      console.log("성공");
+
+      // 성공적으로 데이터가 추가되었음을 알리는 알림 등을 표시할 수 있습니다.
+    } catch (error) {
+      console.log("문제발생!");
+      console.log(sensor_mac);
+      console.error(error);
+
+      // 오류가 발생했을 때 사용자에게 알리는 메시지를 표시할 수 있습니다.
+    }
   };
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
-
         <Grid container spacing={5}>
           <Grid item xs={12}>
             <Typography variant='body2' sx={{ fontWeight: 600 }}>
@@ -91,8 +90,8 @@ const FormLayoutsSeparator = () => {
                 onChange={handleSensorMacChange}
                 labelId='sensor-mac'
               >
-                {sensorList.map(row => (
-                  <MenuItem value='mac'>{row.sensor_mac}</MenuItem>
+                {sensorList.map((row, index) => (
+                  <MenuItem key={index} value={row.sensor_mac}>{row.sensor_mac}</MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -126,7 +125,7 @@ const FormLayoutsSeparator = () => {
             />
           </Grid>
 
-          <Grid item xs={12} >
+          <Grid item xs={12}>
             <BleScanner />
           </Grid>
 

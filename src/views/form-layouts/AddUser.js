@@ -83,6 +83,7 @@ const FormLayoutsSeparator = () => {
     e.preventDefault();
     if (users_pw.password !== users_pw.password2) {
       console.error('비밀번호가 일치하지 않습니다.');
+
       // 오류 처리 로직 추가
       return;
     }
@@ -95,9 +96,11 @@ const FormLayoutsSeparator = () => {
         users_authority: users_authority
       });
       console.log('데이터가 성공적으로 전송되었습니다.');
+
       // 성공적으로 데이터를 전송한 후에 수행할 로직 추가
     } catch (error) {
       console.error('데이터 전송 중 오류가 발생했습니다:', error);
+
       // 데이터 전송 중 오류가 발생했을 때의 처리 로직 추가
     }
   };

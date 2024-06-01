@@ -20,6 +20,7 @@ const navigation = (userRole) => {
       title: '센서 관리',
       icon: AccessPoint,
       path: '/sensors',
+
       // adminOnly: true // 관리자 전용 항목 표시
     },
     {
@@ -39,12 +40,14 @@ const navigation = (userRole) => {
     },
     {
       sectionTitle: '관리자 전용',
+
       // adminOnly: true // 관리자 전용 섹션 표시
     },
     {
       title: '사용자 관리',
       icon: AccountCogOutline,
       path: '/users',
+
       // adminOnly: true // 관리자 전용 항목 표시
     },
     {

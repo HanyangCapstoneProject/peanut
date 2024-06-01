@@ -13,6 +13,7 @@ const SensorList = () => {
         const response = await axios.get('/api/data_sensor');
         if (response.status === 200) {
           const jsonData = response.data;
+
           // 데이터를 배열로 설정합니다.
           setSensorList(Array.isArray(jsonData.sensorList) ? jsonData.sensorList : [jsonData.sensorList]);
         } else {

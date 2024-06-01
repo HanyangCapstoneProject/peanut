@@ -13,6 +13,7 @@ const SiteInfoList = () => {
         const response = await axios.get('/api/site');
         if (response.status === 200) {
           const jsonData = response.data;
+
           // 데이터를 배열로 설정합니다.
           setSiteInfoList(Array.isArray(jsonData.siteInfoList) ? jsonData.siteInfoList : [jsonData.siteInfoList]);
         } else {

@@ -28,6 +28,7 @@ const CalendarCard = () => {
             title="schedule_title"
             startAccessor="start_date" 
             endAccessor="end_date" 
+
             // eventPropGetter= "color"
           />
         </div>

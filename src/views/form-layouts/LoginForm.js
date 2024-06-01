@@ -57,6 +57,7 @@ const LoginForm = () => {
   const handleLogin = (phone, password) => {
     // 사용자를 찾습니다.
     const user = userList.find(user => user.users_id === phone && user.users_pw === password);
+
     // 사용자가 존재하면 권한을 설정합니다.
     if (user && user.users_authority) {
       return 1;
@@ -64,6 +65,7 @@ const LoginForm = () => {
     else if (user) {
       return 2;
     }
+
     // 사용자의 권한을 반환합니다. 사용자가 존재하지 않으면 null을 반환합니다.
     return 3;
   };

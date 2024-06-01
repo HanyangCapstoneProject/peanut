@@ -33,6 +33,7 @@ app.prepare().then(() => {
 
   io.on('connection', (socket) => {
     console.log('a user connected');
+
     // Handle socket events here
     socket.on('disconnect', () => {
       console.log('user disconnected');

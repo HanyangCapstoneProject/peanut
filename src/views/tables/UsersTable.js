@@ -16,8 +16,10 @@ import UserList from 'src/components/UserList';
 function UsersTable() {
   // 페이지 상태를 정의합니다.
   const [page, setPage] = useState(0);
+
   // 페이지 당 행 수 상태를 정의합니다.
   const [rowsPerPage, setRowsPerPage] = useState(10);
+
   // userList를 가져옵니다.
   const userList = UserList();
 
@@ -72,6 +74,7 @@ function UsersTable() {
                 </TableCell>
               </TableRow>
             )) : (
+
               // 데이터가 없는 경우를 처리합니다.
               <TableRow>
                 <TableCell colSpan={5} align="center">

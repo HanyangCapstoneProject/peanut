@@ -66,6 +66,7 @@ const TabInfo = () => {
   const [date, setDate] = useState(null)
   const [openAlert, setOpenAlert] = useState(true)
   const [imgSrc, setImgSrc] = useState('/images/misc/free-icon-building-6017722.png')
+
   const onChange = file => {
     const reader = new FileReader()
     const { files } = file.target

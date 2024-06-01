@@ -13,6 +13,7 @@ const ResultList = () => {
         const response = await axios.get('/api/data_result');
         if (response.status === 200) {
           const jsonData = response.data;
+          
           // 데이터를 배열로 설정합니다.
           setResultList(Array.isArray(jsonData.resultList) ? jsonData.resultList : [jsonData.resultList]);
         } else {
