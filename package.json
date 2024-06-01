@@ -46,6 +46,7 @@
     "@mui/lab": "^5.0.0-alpha.70",
     "@mui/material": "^5.4.3",
     "@popperjs/core": "^2.11.2",
+    "apexcharts": "^3.49.1",
     "apexcharts-clevision": "3.28.5",
     "axios": "^1.7.2",
     "babel-eslint": "^10.1.0",
