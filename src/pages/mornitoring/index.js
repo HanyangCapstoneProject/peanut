@@ -10,16 +10,8 @@ import CardContent from '@mui/material/CardContent';
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import Button from '@mui/material/Button';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
 
 // ** Icons Imports
@@ -121,47 +113,60 @@ const SensorMonitor = () => {
   };
 
   return (
-    <Grid container spacing={6}>
-      <Grid item xs={12}>
-        <Typography variant='h5'>
-          <Link href='https://mui.com/components/tables/' target='_blank'>
-            센싱 값 받기
-          </Link>
-        </Typography>
-        <Typography variant='body2'>센서 모니터링 페이지입니다</Typography>
-      </Grid>
+    <div>
+      <Grid container spacing={6}>
 
-      <Grid item xs={12}>
-        <Card>
-          <CardContent sx={{ pt: theme => `${theme.spacing(2.25)} !important` }}>
-            <FindSensor />
-          </CardContent>
-        </Card>
-      </Grid>
+        <Grid item xs={12}>
+          <Typography variant='h5'>
+            <Link href='https://mui.com/components/tables/' target='_blank'>
+              센싱 값 받기
+            </Link>
+          </Typography>
+          <Typography variant='body2'>센서 모니터링 페이지입니다</Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Card>
+            <CardHeader
+              title='실시간 모니터링'
+              titleTypographyProps={{ sx: { lineHeight: '1.6 !important', letterSpacing: '0.15px !important' } }}
+              action={
+                <IconButton size='small' aria-label='settings' className='card-more-options' sx={{ color: 'text.secondary' }}>
+                  <DotsVertical />
+                </IconButton>
+              }
+            />
+            <Divider sx={{ margin: 0 }} />
+            <CardContent sx={{ pt: theme => `${theme.spacing(2.25)} !important` }}>
+              <LineChart width={1200} height={300} data={sensorData}>
+                <Line type="monotone" dataKey="value" stroke="#8884d8" />
+                <CartesianGrid stroke="#ccc" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+              </LineChart>
+            </CardContent>
+          </Card>
+        </Grid>
 
-      {/* <Grid item xs={12}>
-        <Card>
-          <CardHeader
-            title='2단계 - 실시간 모니터링'
-            titleTypographyProps={{ sx: { lineHeight: '1.6 !important', letterSpacing: '0.15px !important' } }}
-            action={
-              <IconButton size='small' aria-label='settings' className='card-more-options' sx={{ color: 'text.secondary' }}>
-                <DotsVertical />
-              </IconButton>
-            }
-          />
-          <Divider sx={{ margin: 0 }} />
-          <CardContent sx={{ pt: theme => `${theme.spacing(2.25)} !important` }}>
-            <LineChart width={1200} height={300} data={sensorData}>
-              <Line type="monotone" dataKey="value" stroke="#8884d8" />
-              <CartesianGrid stroke="#ccc" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-            </LineChart>
-          </CardContent>
-        </Card>
-      </Grid>
+        <Grid item xs={12}>
+          <Card>
+            <CardHeader
+              title='센싱 하기'
+              titleTypographyProps={{ sx: { lineHeight: '1.6 !important', letterSpacing: '0.15px !important' } }}
+              action={
+                <IconButton size='small' aria-label='settings' className='card-more-options' sx={{ color: 'text.secondary' }}>
+                  <DotsVertical />
+                </IconButton>
+              }
+            />
+            <Divider sx={{ margin: 0 }} />
+            <CardContent sx={{ pt: theme => `${theme.spacing(2.25)} !important` }}>
+              <FindSensor />
+            </CardContent>
+          </Card>
+        </Grid>
+
+        {/* 
 
       <Grid item xs={12}>
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -208,7 +213,8 @@ const SensorMonitor = () => {
           </CardContent>
         </Paper>
       </Grid> */}
-    </Grid>
+      </Grid>
+    </div>
   );
 };
 
