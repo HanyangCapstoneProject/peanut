@@ -17,7 +17,7 @@ export default async function handler(req, res) {
     } else if (req.method === 'POST') {
 
       // POST 요청: 클라이언트로부터 받은 목표온도 정보를 데이터베이스에 추가
-      const { level, area, temp_goal, date } = req.body;
+      const { level, area, temp_goal, cur_date, goal_date } = req.body;
       await axios.post('http://localhost:8089/api/data_result',
       {
         level: level,

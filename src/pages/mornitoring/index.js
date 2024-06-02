@@ -155,8 +155,7 @@ return updatedLevels;
   const calculateAverage = () => {
     if (batteryLevels.length === 0) return 0;
     const total = batteryLevels.reduce((sum, level) => sum + level.level, 0);
-    
-return total / batteryLevels.length;
+    return total / batteryLevels.length;
   };
 
   // 4. 센싱 값 평균 전송 하기
