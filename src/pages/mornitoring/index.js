@@ -128,9 +128,11 @@ const SensorMonitor = () => {
         if (updatedLevels.length > 30) {
           clearInterval(intervalId); // Stop reading further
           characteristic.service.device.gatt.disconnect(); // Disconnect the device
-          return updatedLevels.slice(-30);
+          
+return updatedLevels.slice(-30);
         }
-        return updatedLevels;
+        
+return updatedLevels;
       });
 
       setNum((prevNum) => prevNum + 1);
@@ -153,7 +155,8 @@ const SensorMonitor = () => {
   const calculateAverage = () => {
     if (batteryLevels.length === 0) return 0;
     const total = batteryLevels.reduce((sum, level) => sum + level.level, 0);
-    return total / batteryLevels.length;
+    
+return total / batteryLevels.length;
   };
 
   // 4. 센싱 값 평균 전송 하기
