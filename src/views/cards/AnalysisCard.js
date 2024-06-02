@@ -20,7 +20,7 @@ const AnalysisCard = () => {
   const router = useRouter();
 
   const handlePage = () => {
-    router.push(`/monitoring`);
+    router.push(`/mornitoring`);
   };
 
   const theme = useTheme()
@@ -33,7 +33,14 @@ const AnalysisCard = () => {
 
   // 현재 날짜 출력
   const [currentDate, setCurrentDate] = useState('');
-  const[todayGoal, setTodayGoal] = useState();
+  const[todayGoal, setTodayGoal] = useState('');
+  
+  useEffect(() => {
+    const goalForToday = resultList.find(item => item.cur_date === currentDate);
+    if (goalForToday) {
+      setTodayGoal(goalForToday.temp_goal);
+    }
+  }, [currentDate, resultList]);
 
   useEffect(() => {
     const updateDate = () => {
@@ -134,9 +141,9 @@ const AnalysisCard = () => {
         <ReactApexcharts type='bar' height={205} options={options} series={[{ data: tempGoalValues }]} />
         <Box sx={{ mb: 7, display: 'flex', alignItems: 'center' }}>
           <Typography variant='h5' sx={{ mr: 4 }}>
-            현재 날짜와 같은 값의 목표 온도
+            {todayGoal}
           </Typography>
-          <Typography variant='body2'>tkdxo</Typography>
+          <Typography variant='body2'>오늘의 목표 달성율</Typography>
         </Box>
         <Button 
           fullWidth 
