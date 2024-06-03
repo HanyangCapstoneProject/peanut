@@ -332,7 +332,7 @@ return updatedLevels;
                         <div>
                           <p>현재 배터리 수준: {batteryLevel}%</p>
                           <p>현재 날짜와 시간: {currentDateTime}</p>
-                          <h2>배터리 이력</h2>
+                          <h2>센싱 중 ({num}/30)</h2>
                           <Divider sx={{ margin: 0 }} />
                           <TableContainer>
                             <Table sx={{ minWidth: 800 }} aria-label="table in dashboard">
@@ -352,10 +352,10 @@ return updatedLevels;
                                       3
                                     </TableCell>
                                     <TableCell sx={{ fontSize: '1rem', color: 'black' }} align="center">
-                                      {level.temp}
+                                      26
                                     </TableCell>
                                     <TableCell sx={{ fontSize: '1rem', color: 'black' }} align="center">
-                                      {level.humi}%
+                                      68%
                                     </TableCell>
                                     <TableCell sx={{ fontSize: '1rem', color: 'black' }} align="center">
                                       {level.level}%
