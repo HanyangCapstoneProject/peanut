@@ -28,6 +28,7 @@ const AnalysisCard = () => {
   const resultList = ResultList();
 
   // resultList에서 cur_date 및 temp_goal 값 추출
+  // reverse()로 가장 최신 올림
   const dateValues = resultList.reverse().map(item => item.cur_date);
   const tempGoalValues = resultList.map(item => item.temp_goal);
 
