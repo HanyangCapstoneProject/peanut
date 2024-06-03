@@ -16,45 +16,6 @@ import DotsVertical from 'mdi-material-ui/DotsVertical'
 import ResultList from 'src/components/ResultList';
 import Schedule from 'src/components/Schedule';
 
-const data = [
-  {
-    progress: 0,
-    imgHeight: 20,
-    title: '다음 타설 예정일',
-    color: 'primary',
-    amount: '2024.01.25',
-    subtitle: '2024.01.25',
-    imgSrc: '/images/logos/check.png'
-  },
-  {
-    progress: 25,
-    color: 'info',
-    imgHeight: 20,
-    title: '중간 점검 작업',
-    amount: '2024.01.24',
-    subtitle: '2024.01.04',
-    imgSrc: '/images/logos/check.png'
-  },
-  {
-    progress: 90,
-    imgHeight: 20,
-    title: '양생 작업',
-    color: 'secondary',
-    amount: '2023.12.28',
-    subtitle: '2024.01.02',
-    imgSrc: '/images/logos/check.png'
-  },
-  {
-    progress: 90,
-    imgHeight: 20,
-    title: '양생 작업',
-    color: 'secondary',
-    amount: '2023.12.28',
-    subtitle: '2024.01.02',
-    imgSrc: '/images/logos/check.png'
-  }
-]
-
 const PredictCard = () => {
 
   const resultList = ResultList();
